@@ -1,4 +1,4 @@
-# FreeGPT WebUI 
+# FreeGPT WebUI v2
 ## GPT 3.5/4
 
 <strong>NOT REQUIRE ANY API KEY</strong> ❌🔑 
