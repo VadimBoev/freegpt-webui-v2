@@ -9,7 +9,7 @@ This project features a WebUI utilizing the [G4F API](https://github.com/xtekky/
 Experience the power of ChatGPT with a user-friendly interface, enhanced jailbreaks, and completely free.  
 
 **Important!** Don't be afraid to ask a question or write about any problem in the "issue". We will solve a question or a problem together!  
-You can [buy me coffee](https://test.net) here ☕🤎
+You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 
 ## Known bugs 🚧
 - Stream mode not working properly.
