@@ -14,6 +14,7 @@ Experience the power of ChatGPT with a user-friendly interface, enhanced jailbre
 ## Features v2 📢
 - Updated g4f
 - Fixes to make everything work
+- At the moment, only gpt 3.5 turbo works, but I think I will fix it in the future
 
 ## Project Hosting and Demonstration 🌐🚀
 The project is hosted on multiple platforms to be tested and modified.
