@@ -9,9 +9,11 @@ Experience the power of ChatGPT with a user-friendly interface, enhanced jailbre
 
 ## Known bugs 🚧
 - Stream mode not working properly.
+- Docker is missing (possibly temporarily)
 
-## News 📢
-I fix freegpt-webui by ramonvc (in the process of correction)
+## Features v2 📢
+- Updated g4f
+- Fixes to make everything work
 
 ## Project Hosting and Demonstration 🌐🚀
 The project is hosted on multiple platforms to be tested and modified.
