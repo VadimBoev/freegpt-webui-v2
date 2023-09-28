@@ -8,11 +8,12 @@
 This project features a WebUI utilizing the [G4F API](https://github.com/xtekky/gpt4free). <br>
 Experience the power of ChatGPT with a user-friendly interface, enhanced jailbreaks, and completely free.  
 
-**Important!** Don't be afraid to ask a question or write about any problem in the "issue". We will solve a question or a problem together!  
+**Important!** Don't be afraid to ask a question or write about any problem in the "issue". We will solve a question or a problem together! 🌍  
 You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 
 ## Known bugs 🚧
 - Stream mode not working properly.
+- At the moment, only gpt 3.5 turbo works, but I think I will fix it in the future
 - Docker is missing (possibly temporarily)
 - Operation timed out after 30000 milliseconds
 - ChatGPT does not remember the dialog.  
@@ -21,7 +22,6 @@ This problem is related to the fact that I use a different solution method so th
 ## Features v2 📢
 - Updated g4f
 - Fixes to make everything work
-- At the moment, only gpt 3.5 turbo works, but I think I will fix it in the future
 
 ## Project Hosting and Demonstration 🌐🚀
 The project is hosted on multiple platforms to be tested and modified.
