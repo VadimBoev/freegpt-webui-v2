@@ -23,7 +23,7 @@ This problem is related to the fact that I use a different solution method so th
 The project is hosted on multiple platforms to be tested and modified.
 |Platform|Status|API Key|Free|Repo|Demo|
 |--|--|--|--|--|--|
-|[My site](https://test.com/)|![Active](https://img.shields.io/badge/Active-brightgreen)|◼️|☑️|[FreeGPT WebUI](https://github.com/VadimBoev/freegpt-webui-v2)|[Chat](https://test.com/chat/)
+|[My site](https://github.com/VadimBoev/freegpt-webui-v2)|![Active](https://img.shields.io/badge/Active-brightgreen)|◼️|☑️|[FreeGPT WebUI](https://github.com/VadimBoev/freegpt-webui-v2)|[Chat](https://github.com/VadimBoev/freegpt-webui-v2)
 
 ## Table of Contents  
 - [To-Do List](#to-do-list-%EF%B8%8F)  
