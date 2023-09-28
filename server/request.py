@@ -1,11 +1,13 @@
 import g4f
 import sys
-import json
 
-import asyncio
+#this is for the future
+#import json
+
+#import asyncio
 
 #its fix for Windows
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+#asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 response = g4f.ChatCompletion.create(
     model="gpt-3.5-turbo",
