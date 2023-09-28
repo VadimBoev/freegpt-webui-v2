@@ -1,233 +1,250 @@
-from g4f import Provider
+from __future__  import annotations
+from dataclasses import dataclass
+from .typing     import Union
+from .Provider   import BaseProvider, RetryProvider
+from .Provider   import (
+    ChatgptLogin,
+    ChatgptAi, 
+    ChatBase, 
+    Vercel, 
+    DeepAi, 
+    Aivvm, 
+    Bard, 
+    H2o,
+    GptGo,
+    Bing,
+    PerplexityAi,
+    Wewordle,
+    Yqcloud,
+    AItianhu,
+    AItianhuSpace,
+    Aichat,
+    Myshell,
+    Aibn,
+    ChatgptDuo,
+)
 
-
+@dataclass(unsafe_hash=True)
 class Model:
-    class model:
-        name: str
-        base_provider: str
-        best_provider: str
+    name: str
+    base_provider: str
+    best_provider: Union[type[BaseProvider], RetryProvider] = None
 
-    class gpt_35_turbo:
-        name: str = 'gpt-3.5-turbo'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Wewordle
+# Config for HuggingChat, OpenAssistant
+# Works for Liaobots, H2o, OpenaiChat, Yqcloud, You
+default = Model(
+    name          = "",
+    base_provider = "",
+    best_provider = RetryProvider([
+        Bing,         # Not fully GPT 3 or 4
+        PerplexityAi, # Adds references to sources
+        Wewordle,     # Responds with markdown
+        Yqcloud,      # Answers short questions in chinese
+        ChatBase,     # Don't want to answer creatively
+        ChatgptDuo,   # Include search results
+        DeepAi, ChatgptLogin, ChatgptAi, Aivvm, GptGo, AItianhu, AItianhuSpace, Aichat, Myshell, Aibn,
+    ])
+)
 
-    class gpt_35_turbo_0613:
-        name: str = 'gpt-3.5-turbo-0613'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Zeabur
+# GPT-3.5 / GPT-4
+gpt_35_turbo = Model(
+    name          = 'gpt-3.5-turbo',
+    base_provider = 'openai',
+    best_provider = RetryProvider([
+        DeepAi, ChatgptLogin, ChatgptAi, Aivvm, GptGo, AItianhu, Aichat, AItianhuSpace, Myshell, Aibn,
+    ])
+)
 
-    class gpt_35_turbo_0301:
-        name: str = 'gpt-3.5-turbo-0301'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Zeabur
+gpt_4 = Model(
+    name          = 'gpt-4',
+    base_provider = 'openai',
+    best_provider = RetryProvider([
+        Myshell, AItianhuSpace,
+    ])
+)
 
-    class gpt_35_turbo_16k_0613:
-        name: str = 'gpt-3.5-turbo-16k-0613'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Zeabur
+# Bard
+palm = Model(
+    name          = 'palm',
+    base_provider = 'google',
+    best_provider = Bard)
 
-    class gpt_35_turbo_16k:
-        name: str = 'gpt-3.5-turbo-16k'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.ChatFree
+# H2o
+falcon_7b = Model(
+    name          = 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-7b-v3',
+    base_provider = 'huggingface',
+    best_provider = H2o)
 
-    class gpt_4_dev:
-        name: str = 'gpt-4-for-dev'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Phind
+falcon_40b = Model(
+    name          = 'h2oai/h2ogpt-gm-oasst1-en-2048-falcon-40b-v1',
+    base_provider = 'huggingface',
+    best_provider = H2o)
 
-    class gpt_4:
-        name: str = 'gpt-4'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.ChatgptAi
+llama_13b = Model(
+    name          = 'h2oai/h2ogpt-gm-oasst1-en-2048-open-llama-13b',
+    base_provider = 'huggingface',
+    best_provider = H2o)
 
-    class gpt_4_0613:
-        name: str = 'gpt-4-0613'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Lockchat
-        best_providers: list = [Provider.Bing, Provider.Lockchat]
+# Vercel
+claude_instant_v1 = Model(
+    name          = 'claude-instant-v1',
+    base_provider = 'anthropic',
+    best_provider = Vercel)
 
-    class claude_instant_v1_100k:
-        name: str = 'claude-instant-v1-100k'
-        base_provider: str = 'anthropic'
-        best_provider: Provider.Provider = Provider.Vercel
+claude_v1 = Model(
+    name          = 'claude-v1',
+    base_provider = 'anthropic',
+    best_provider = Vercel)
 
-    class claude_instant_v1:
-        name: str = 'claude-instant-v1'
-        base_provider: str = 'anthropic'
-        best_provider: Provider.Provider = Provider.Vercel
+claude_v2 = Model(
+    name          = 'claude-v2',
+    base_provider = 'anthropic',
+    best_provider = Vercel)
 
-    class claude_v1_100k:
-        name: str = 'claude-v1-100k'
-        base_provider: str = 'anthropic'
-        best_provider: Provider.Provider = Provider.Vercel
+command_light_nightly = Model(
+    name          = 'command-light-nightly',
+    base_provider = 'cohere',
+    best_provider = Vercel)
 
-    class claude_v1:
-        name: str = 'claude-v1'
-        base_provider: str = 'anthropic'
-        best_provider: Provider.Provider = Provider.Vercel
+command_nightly = Model(
+    name          = 'command-nightly',
+    base_provider = 'cohere',
+    best_provider = Vercel)
 
-    class alpaca_7b:
-        name: str = 'alpaca-7b'
-        base_provider: str = 'replicate'
-        best_provider: Provider.Provider = Provider.Vercel
+gpt_neox_20b = Model(
+    name          = 'EleutherAI/gpt-neox-20b',
+    base_provider = 'huggingface',
+    best_provider = Vercel)
 
-    class stablelm_tuned_alpha_7b:
-        name: str = 'stablelm-tuned-alpha-7b'
-        base_provider: str = 'replicate'
-        best_provider: Provider.Provider = Provider.Vercel
+oasst_sft_1_pythia_12b = Model(
+    name          = 'OpenAssistant/oasst-sft-1-pythia-12b',
+    base_provider = 'huggingface',
+    best_provider = Vercel)
 
-    class bloom:
-        name: str = 'bloom'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.Vercel
+oasst_sft_4_pythia_12b_epoch_35 = Model(
+    name          = 'OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5',
+    base_provider = 'huggingface',
+    best_provider = Vercel)
 
-    class bloomz:
-        name: str = 'bloomz'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.Vercel
+santacoder = Model(
+    name          = 'bigcode/santacoder',
+    base_provider = 'huggingface',
+    best_provider = Vercel)
 
-    class flan_t5_xxl:
-        name: str = 'flan-t5-xxl'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.Vercel
+bloom = Model(
+    name          = 'bigscience/bloom',
+    base_provider = 'huggingface',
+    best_provider = Vercel)
 
-    class flan_ul2:
-        name: str = 'flan-ul2'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.Vercel
+flan_t5_xxl = Model(
+    name          = 'google/flan-t5-xxl',
+    base_provider = 'huggingface',
+    best_provider = Vercel)
 
-    class gpt_neox_20b:
-        name: str = 'gpt-neox-20b'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.Vercel
+code_davinci_002 = Model(
+    name          = 'code-davinci-002',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class oasst_sft_4_pythia_12b_epoch_35:
-        name: str = 'oasst-sft-4-pythia-12b-epoch-3.5'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.Vercel
+gpt_35_turbo_16k = Model(
+    name          = 'gpt-3.5-turbo-16k',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class santacoder:
-        name: str = 'santacoder'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.Vercel
+gpt_35_turbo_16k_0613 = Model(
+    name          = 'gpt-3.5-turbo-16k-0613',
+    base_provider = 'openai')
 
-    class command_medium_nightly:
-        name: str = 'command-medium-nightly'
-        base_provider: str = 'cohere'
-        best_provider: Provider.Provider = Provider.Vercel
+gpt_35_turbo_0613 = Model(
+    name          = 'gpt-3.5-turbo-0613',
+    base_provider = 'openai',
+    best_provider = RetryProvider([
+        Aivvm, ChatgptLogin
+    ])
+)
 
-    class command_xlarge_nightly:
-        name: str = 'command-xlarge-nightly'
-        base_provider: str = 'cohere'
-        best_provider: Provider.Provider = Provider.Vercel
+gpt_4_0613 = Model(
+    name          = 'gpt-4-0613',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class code_cushman_001:
-        name: str = 'code-cushman-001'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Vercel
+text_ada_001 = Model(
+    name          = 'text-ada-001',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class code_davinci_002:
-        name: str = 'code-davinci-002'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Vercel
+text_babbage_001 = Model(
+    name          = 'text-babbage-001',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class text_ada_001:
-        name: str = 'text-ada-001'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Vercel
+text_curie_001 = Model(
+    name          = 'text-curie-001',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class text_babbage_001:
-        name: str = 'text-babbage-001'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Vercel
+text_davinci_002 = Model(
+    name          = 'text-davinci-002',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class text_curie_001:
-        name: str = 'text-curie-001'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Vercel
+text_davinci_003 = Model(
+    name          = 'text-davinci-003',
+    base_provider = 'openai',
+    best_provider = Vercel)
 
-    class text_davinci_002:
-        name: str = 'text-davinci-002'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Vercel
+llama13b_v2_chat = Model(
+    name          = 'replicate:a16z-infra/llama13b-v2-chat',
+    base_provider = 'replicate',
+    best_provider = Vercel)
 
-    class text_davinci_003:
-        name: str = 'text-davinci-003'
-        base_provider: str = 'openai'
-        best_provider: Provider.Provider = Provider.Vercel
-
-    class palm:
-        name: str = 'palm2'
-        base_provider: str = 'google'
-        best_provider: Provider.Provider = Provider.Bard
-
-    class falcon_40b:
-        name: str = 'falcon-40b'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.H2o
-
-    class falcon_7b:
-        name: str = 'falcon-7b'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.H2o
-
-    class llama_13b:
-        name: str = 'llama-13b'
-        base_provider: str = 'huggingface'
-        best_provider: Provider.Provider = Provider.H2o
+llama7b_v2_chat = Model(
+    name          = 'replicate:a16z-infra/llama7b-v2-chat',
+    base_provider = 'replicate',
+    best_provider = Vercel)
 
 
 class ModelUtils:
-    convert: dict = {
-        'gpt-3.5-turbo': Model.gpt_35_turbo,
-        'gpt-3.5-turbo-0613': Model.gpt_35_turbo_0613,
-        'gpt-3.5-turbo-0301': Model.gpt_35_turbo_0301,
-        'gpt-4': Model.gpt_4,
-        'gpt-4-0613': Model.gpt_4_0613,
-        'gpt-4-for-dev': Model.gpt_4_dev,
-        'gpt-3.5-turbo-16k': Model.gpt_35_turbo_16k,
-        'gpt-3.5-turbo-16k-0613': Model.gpt_35_turbo_16k_0613,
-
-        'claude-instant-v1-100k': Model.claude_instant_v1_100k,
-        'claude-v1-100k': Model.claude_v1_100k,
-        'claude-instant-v1': Model.claude_instant_v1,
-        'claude-v1': Model.claude_v1,
-
-        'alpaca-7b': Model.alpaca_7b,
-        'stablelm-tuned-alpha-7b': Model.stablelm_tuned_alpha_7b,
-
-        'bloom': Model.bloom,
-        'bloomz': Model.bloomz,
-
-        'flan-t5-xxl': Model.flan_t5_xxl,
-        'flan-ul2': Model.flan_ul2,
-
-        'gpt-neox-20b': Model.gpt_neox_20b,
-        'oasst-sft-4-pythia-12b-epoch-3.5': Model.oasst_sft_4_pythia_12b_epoch_35,
-        'santacoder': Model.santacoder,
-
-        'command-medium-nightly': Model.command_medium_nightly,
-        'command-xlarge-nightly': Model.command_xlarge_nightly,
-
-        'code-cushman-001': Model.code_cushman_001,
-        'code-davinci-002': Model.code_davinci_002,
-
-        'text-ada-001': Model.text_ada_001,
-        'text-babbage-001': Model.text_babbage_001,
-        'text-curie-001': Model.text_curie_001,
-        'text-davinci-002': Model.text_davinci_002,
-        'text-davinci-003': Model.text_davinci_003,
-
-        'palm2': Model.palm,
-        'palm': Model.palm,
-        'google': Model.palm,
-        'google-bard': Model.palm,
-        'google-palm': Model.palm,
-        'bard': Model.palm,
-
-        'falcon-40b': Model.falcon_40b,
-        'falcon-7b': Model.falcon_7b,
-        'llama-13b': Model.llama_13b,
+    convert: dict[str, Model] = {
+        # gpt-3.5 / gpt-4
+        'gpt-3.5-turbo'          : gpt_35_turbo,
+        'gpt-3.5-turbo-16k'      : gpt_35_turbo_16k,
+        'gpt-4'                  : gpt_4,
+        'gpt-4-0613'             : gpt_4_0613,
+        'gpt-3.5-turbo-16k-0613' : gpt_35_turbo_16k_0613,
+        
+        # Bard
+        'palm2'       : palm,
+        'palm'        : palm,
+        'google'      : palm,
+        'google-bard' : palm,
+        'google-palm' : palm,
+        'bard'        : palm,
+        
+        # H2o
+        'falcon-40b' : falcon_40b,
+        'falcon-7b'  : falcon_7b,
+        'llama-13b'  : llama_13b,
+        
+        # Vercel
+        'claude-instant-v1' : claude_instant_v1,
+        'claude-v1'         : claude_v1,
+        'claude-v2'         : claude_v2,
+        'command-nightly'   : command_nightly,
+        'gpt-neox-20b'      : gpt_neox_20b,
+        'santacoder'        : santacoder,
+        'bloom'             : bloom,
+        'flan-t5-xxl'       : flan_t5_xxl,
+        'code-davinci-002'  : code_davinci_002,
+        'text-ada-001'      : text_ada_001,
+        'text-babbage-001'  : text_babbage_001,
+        'text-curie-001'    : text_curie_001,
+        'text-davinci-002'  : text_davinci_002,
+        'text-davinci-003'  : text_davinci_003,
+        'llama13b-v2-chat'  : llama13b_v2_chat,
+        'llama7b-v2-chat'   : llama7b_v2_chat,
+        
+        'oasst-sft-1-pythia-12b'           : oasst_sft_1_pythia_12b,
+        'oasst-sft-4-pythia-12b-epoch-3.5' : oasst_sft_4_pythia_12b_epoch_35,
+        'command-light-nightly'            : command_light_nightly,
     }
