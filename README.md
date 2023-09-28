@@ -11,6 +11,8 @@ Experience the power of ChatGPT with a user-friendly interface, enhanced jailbre
 - Stream mode not working properly.
 - Docker is missing (possibly temporarily)
 - Operation timed out after 30000 milliseconds
+- ChatGPT does not remember the dialog.  
+This problem is related to the fact that I use a different solution method so that our Web UI can access g4f. This is fixable, not critical and not scary
 
 ## Features v2 📢
 - Updated g4f
