@@ -1,4 +1,6 @@
 # FreeGPT WebUI v2
+<img src="https://github.com/VadimBoev/freegpt-webui-v2/blob/main/webui-gpt.png" width="1000" />
+
 ## GPT 3.5/4
 
 <strong>NOT REQUIRE ANY API KEY</strong> ❌🔑 
