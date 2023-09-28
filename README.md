@@ -8,7 +8,9 @@
 This project features a WebUI utilizing the [G4F API](https://github.com/xtekky/gpt4free). <br>
 Experience the power of ChatGPT with a user-friendly interface, enhanced jailbreaks, and completely free.  
 
-**Important!** Don't be afraid to ask a question or write about any problem in the "issue". We will solve a question or a problem together! 🌍  
+**Important!** Don't be afraid to ask a question or write about any problem in the "issue".  
+We will solve a question or a problem together! 🌍  
+
 You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 
 ## Known bugs 🚧
