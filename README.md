@@ -10,6 +10,7 @@ Experience the power of ChatGPT with a user-friendly interface, enhanced jailbre
 ## Known bugs 🚧
 - Stream mode not working properly.
 - Docker is missing (possibly temporarily)
+- Operation timed out after 30000 milliseconds
 
 ## Features v2 📢
 - Updated g4f
