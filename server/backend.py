@@ -1,10 +1,11 @@
 import re
 from datetime import datetime
-from g4f import ChatCompletion
+import g4f
 from flask import request, Response, stream_with_context
 from requests import get
 from server.config import special_instructions
-
+import json
+import subprocess
 
 class Backend_Api:
     def __init__(self, bp, config: dict) -> None:
@@ -33,15 +34,34 @@ class Backend_Api:
             jailbreak = request.json['jailbreak']
             model = request.json['model']
             messages = build_messages(jailbreak)
+            
+            #=============================================================================================================
+            #I couldn't fix it, so I'm using a different solution method.
+            
+            #response = ChatCompletion.create(
+            #    model=model,
+            #    chatId=conversation_id,
+            #    messages=messages
+            #)
+            
+            #return Response(stream_with_context(generate_stream(response, jailbreak)), mimetype='text/event-stream')
+            #=============================================================================================================
+            
+            script_path = 'server/request.py'
+            
+            #print(messages)
+            #print(messages[len(messages) - 1])
+            #print(messages[len(messages) - 1]["content"])
+            
+            get_text = messages[len(messages) - 1]["content"]
+            print(get_text)
+            script_parameters = [get_text]
 
-            # Generate response
-            response = ChatCompletion.create(
-                model=model,
-                chatId=conversation_id,
-                messages=messages
-            )
+            result = subprocess.check_output(['python', script_path] + script_parameters, universal_newlines=True)
 
-            return Response(stream_with_context(generate_stream(response, jailbreak)), mimetype='text/event-stream')
+            #print(result)
+            
+            return result
 
         except Exception as e:
             print(e)
@@ -68,12 +88,13 @@ def build_messages(jailbreak):
     # Add the existing conversation
     conversation = _conversation
 
+    #This API doesn't work!
     # Add web results if enabled
-    if internet_access:
-        current_date = datetime.now().strftime("%Y-%m-%d")
-        query = f'Current date: {current_date}. ' + prompt["content"]
-        search_results = fetch_search_results(query)
-        conversation.extend(search_results)
+    #if internet_access:
+    #    current_date = datetime.now().strftime("%Y-%m-%d")
+    #    query = f'Current date: {current_date}. ' + prompt["content"]
+    #    search_results = fetch_search_results(query)
+    #    conversation.extend(search_results)
 
     # Add jailbreak instructions if enabled
     if jailbreak_instructions := getJailbreak(jailbreak):
