@@ -1,24 +1,23 @@
 # FreeGPT WebUI 
 ## GPT 3.5/4
 
+<strong>NOT REQUIRE ANY API KEY</strong> ❌🔑 
+
+
 This project features a WebUI utilizing the [G4F API](https://github.com/xtekky/gpt4free). <br>
 Experience the power of ChatGPT with a user-friendly interface, enhanced jailbreaks, and completely free.
 
-##
-> [!WARNING]
-> It's with a heavy heart that I announce the archiving of this repository. Due to various commitments, I no longer have the time to maintain and keep it updated.
-> I want to express my sincere thanks to everyone who contributed to and used this project; your  involvement was invaluable.
-> Even though this repository is being archived, it will remain available as a guide and reference for those who wish to integrate G4F with web interfaces.
-> I appreciate everyone's understanding and wish you all success in your future projects! 
+## Known bugs 🚧
+- Stream mode not working properly.
+
+## News 📢
+I fix freegpt-webui by ramonvc (in the process of correction)
 
 ## Project Hosting and Demonstration 🌐🚀
 The project is hosted on multiple platforms to be tested and modified.
 |Platform|Status|API Key|Free|Repo|Demo|
 |--|--|--|--|--|--|
-|[replit](https://replit.com/)|![Active](https://img.shields.io/badge/Active-brightgreen)|◼️|☑️|[FreeGPT WebUI](https://replit.com/@ramonvc/freegpt-webui)|[Chat](https://freegpt-webui.ramonvc.repl.co/chat/)
-|[hugging face](https://huggingface.co)|![Active](https://img.shields.io/badge/Active-brightgreen)|◼️|☑️|[FreeGPT WebUI](https://huggingface.co/spaces/monra/freegpt-webui/tree/main)|[Chat](https://huggingface.co/spaces/monra/freegpt-webui)
-|[replit](https://replit.com/)|![Active](https://img.shields.io/badge/Active-brightgreen)|☑️|☑️|[FreeGPT WebUI - Naga Version](https://replit.com/@ramonvc/freegpt-webui-chimera)|[Chat](https://freegpt-webui-chimera.ramonvc.repl.co/chat/)
-|[hugging face](https://huggingface.co)|![Active](https://img.shields.io/badge/Active-brightgreen)|☑️|☑️|[FreeGPT WebUI - Naga Version](https://huggingface.co/spaces/monra/freegpt-webui-chimera/tree/main)|[Chat](https://huggingface.co/spaces/monra/freegpt-webui-chimera)
+|[My site](https://test.com/)|![Active](https://img.shields.io/badge/Active-brightgreen)|◼️|☑️|[FreeGPT WebUI](https://github.com/VadimBoev/freegpt-webui-v2)|[Chat](https://test.com/chat/)
 
 ## Table of Contents  
 - [To-Do List](#to-do-list-%EF%B8%8F)  
@@ -26,9 +25,6 @@ The project is hosted on multiple platforms to be tested and modified.
   - [Cloning the Repository](#cloning-the-repository-inbox_tray)  
   - [Install Dependencies](#install-dependencies-wrench)  
 - [Running the Application](#running-the-application-rocket)  
-- [Docker](#docker-)  
-  - [Prerequisites](#prerequisites)  
-  - [Running the Docker](#running-the-docker)
 - [Incorporated Projects](#incorporated-projects-busts_in_silhouette)
   - [WebUI](#webui) 
   - [API FreeGPT](#api-g4f)
@@ -42,7 +38,7 @@ To get started with this project, you'll need to clone the repository and have [
 Run the following command to clone the repository:  
 
 ```
-git clone https://github.com/ramonvc/freegpt-webui.git
+git clone https://github.com/VadimBoev/freegpt-webui-v2.git
 ```
 
 ### Install Dependencies :wrench: 
@@ -68,36 +64,6 @@ http://127.0.0.1:1338
 or
 ```
 http://localhost:1338
-```
-
-
-## Docker 🐳
-### Prerequisites
-Before you start, make sure you have installed [Docker](https://www.docker.com/get-started) on your machine.
-
-### Running the Docker
-Pull the Docker image from Docker Hub:
-```
-docker pull ramonvc/freegpt-webui
-```
-
-Run the application using Docker:
-```
-docker run -p 1338:1338 ramonvc/freegpt-webui
-```
-
-Access the application in your browser using the URL:
-```
-http://127.0.0.1:1338
-```
-or
-```
-http://localhost:1338
-```
-
-When you're done using the application, stop the Docker containers using the following command:
-```
-docker stop <container-id>
 ```
 
 ## Incorporated Projects :busts_in_silhouette:
