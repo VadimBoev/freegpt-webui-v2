@@ -31,7 +31,7 @@ Because the API that was used earlier in the "freegpt-webui" repository from ram
 The project is hosted on multiple platforms to be tested and modified.
 |Platform|Status|API Key|Free|Repo|Demo|
 |--|--|--|--|--|--|
-|[My site](https://github.com/VadimBoev/freegpt-webui-v2)|![Active](https://img.shields.io/badge/Active-brightgreen)|◼️|☑️|[FreeGPT WebUI](https://github.com/VadimBoev/freegpt-webui-v2)|[Chat](https://github.com/VadimBoev/freegpt-webui-v2)
+|[My site](http://vadimboev.ru:1338/)|![Active](https://img.shields.io/badge/Active-brightgreen)|◼️|☑️|[FreeGPT WebUI](https://github.com/VadimBoev/freegpt-webui-v2)|[Chat](http://vadimboev.ru:1338/)
 
 ## Table of Contents  
 - [To-Do List](#to-do-list-%EF%B8%8F)  
@@ -47,6 +47,7 @@ The project is hosted on multiple platforms to be tested and modified.
 
 ## Getting Started :white_check_mark:  
 To get started with this project, you'll need to clone the repository and have [Python](https://www.python.org/downloads/) installed on your system.  
+(Version 3.10+ is recommended. It also works for me on 3.9.2 in debian 11).
   
 ### Cloning the Repository :inbox_tray:
 Run the following command to clone the repository:  
