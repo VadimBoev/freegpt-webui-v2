@@ -20,6 +20,8 @@ You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 - Operation timed out after 30000 milliseconds
 - ChatGPT does not remember the dialog.  
 This problem is related to the fact that I use a different solution method so that our Web UI can access g4f. This is fixable, not critical and not scary
+- Web Access is not working.  
+Because the API that was used earlier in the "freegpt-webui" repository from ramonvc stopped working. This will be fixed later
 
 ## Features v2 📢
 - Updated g4f
