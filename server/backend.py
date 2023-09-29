@@ -57,7 +57,7 @@ class Backend_Api:
             print(get_text)
             script_parameters = [get_text]
 
-            result = subprocess.check_output(['python', script_path] + script_parameters, universal_newlines=True)
+            result = subprocess.check_output(['python3', script_path] + script_parameters, universal_newlines=True)
 
             #print(result)
             
