@@ -18,8 +18,6 @@ You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 - At the moment, only gpt 3.5 turbo works, but I think I will fix it in the future
 - Docker is missing (possibly temporarily)
 - Operation timed out after 30000 milliseconds
-- ChatGPT does not remember the dialog.  
-This problem is related to the fact that I use a different solution method so that our Web UI can access g4f. This is fixable, not critical and not scary
 - Web Access is not working.  
 Because the API that was used earlier in the "freegpt-webui" repository from ramonvc stopped working. This will be fixed later
 
