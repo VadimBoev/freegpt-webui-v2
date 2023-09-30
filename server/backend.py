@@ -6,6 +6,7 @@ from requests import get
 from server.config import special_instructions
 import json
 import subprocess
+import sys
 
 class Backend_Api:
     def __init__(self, bp, config: dict) -> None:
@@ -54,10 +55,26 @@ class Backend_Api:
             #print(messages[len(messages) - 1]["content"])
             
             get_text = messages[len(messages) - 1]["content"]
-            print(get_text)
-            script_parameters = [get_text]
+            #print(get_text)
+            ##script_parameters = [model, get_text]
+            
+            if sys.version_info<(3,9,2):
+                return "Please install python 3.9.2 and higher. Or try using 'python3' if you have run the script using 'python'"
+            
+            messages_json = json.dumps(messages)
+            result = ""
+            try:
+                result = subprocess.check_output(['python', script_path] + [model, messages_json], universal_newlines=True)
+            except Exception as e:
+                print("You may have run the script with the wrong version of Python")
+                print(f"#1 Error: {e}")
+                try:
+                    result = subprocess.check_output(['python3', script_path] + [model, messages_json], universal_newlines=True)
+                except Exception as e:
+                    print(f"#2 Error: {e}")
+                    return "You have a problem with Python. Open the console and read the errors"
 
-            result = subprocess.check_output(['python3', script_path] + script_parameters, universal_newlines=True)
+            ##result = subprocess.check_output(['python', script_path] + script_parameters, universal_newlines=True)
 
             #print(result)
             
