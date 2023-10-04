@@ -1,11 +1,12 @@
 from __future__ import annotations
-from g4f        import models
+#from g4f        import models
+from .models     import Model, ModelUtils
 from .Provider  import BaseProvider, AsyncProvider
 from .typing    import Any, CreateResult, Union
 from requests   import get
 
 logging = False
-version = '0.1.4.2'
+version = '0.1.4.7'
 
 def check_pypi_version():
     try:
@@ -18,7 +19,7 @@ def check_pypi_version():
     except Exception as e:
         print(f'Failed to check g4f pypi version: {e}')
 
-check_pypi_version()
+#check_pypi_version()
 
 def get_model_and_provider(model: Union[models.Model, str], provider: type[BaseProvider], stream: bool):
     if isinstance(model, str):
