@@ -18,10 +18,9 @@ models = {
 
 class Aivvm(AsyncGeneratorProvider):
     url                   = 'https://chat.aivvm.com'
-    supports_stream       = True
-    working               = True
     supports_gpt_35_turbo = True
     supports_gpt_4        = True
+    working = True
 
     @classmethod
     async def create_async_generator(
@@ -29,6 +28,7 @@ class Aivvm(AsyncGeneratorProvider):
         model: str,
         messages: list[dict[str, str]],
         stream: bool,
+        timeout: int = 30,
         **kwargs
     ) -> AsyncGenerator:
         if not model:
@@ -43,10 +43,18 @@ class Aivvm(AsyncGeneratorProvider):
             "prompt"      : kwargs.get("system_message", "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown."),
             "temperature" : kwargs.get("temperature", 0.7)
         }
-        async with StreamSession(impersonate="chrome107") as session:
+        headers = {
+            "Accept": "*/*",
+            "Origin": cls.url,
+            "Referer": f"{cls.url}/",
+        }
+        async with StreamSession(impersonate="chrome107", headers=headers, timeout=timeout) as session:
             async with session.post(f"{cls.url}/api/chat", json=json_data) as response:
                 response.raise_for_status()
                 async for chunk in response.iter_content():
+                    if b'Access denied | chat.aivvm.com used Cloudflare' in chunk:
+                        raise ValueError("Rate Limit | use another provider")
+                    
                     yield chunk.decode()
 
     @classmethod
