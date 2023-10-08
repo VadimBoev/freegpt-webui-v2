@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  freegpt-webui:
+    image: freegpt-webui-v2
+    container_name: freegpt-webui-v2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1338:1338"
