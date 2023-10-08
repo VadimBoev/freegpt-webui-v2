@@ -15,7 +15,6 @@ You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 
 ## Known bugs 🚧
 - Stream mode not working properly.
-- Docker is missing (possibly temporarily)
 - Operation timed out after 30000 milliseconds
 - Web Access is not working.  
 Because the API that was used earlier in the "freegpt-webui" repository from ramonvc stopped working. This will be fixed later
@@ -35,7 +34,10 @@ The project is hosted on multiple platforms to be tested and modified.
 - [Getting Started](#getting-started-white_check_mark)  
   - [Cloning the Repository](#cloning-the-repository-inbox_tray)  
   - [Install Dependencies](#install-dependencies-wrench)  
-- [Running the Application](#running-the-application-rocket)  
+- [Running the Application](#running-the-application-rocket)
+- [Docker](#docker-)  
+  - [Prerequisites](#prerequisites)  
+  - [Running the Docker](#running-the-docker)
 - [Incorporated Projects](#incorporated-projects-busts_in_silhouette)
   - [WebUI](#webui) 
   - [API FreeGPT](#api-g4f)
@@ -76,6 +78,35 @@ http://127.0.0.1:1338
 or
 ```
 http://localhost:1338
+```
+
+## Docker 🐳
+### Prerequisites
+Before you start, make sure you have installed [Docker](https://www.docker.com/get-started) on your machine.
+
+### Running the Docker
+Pull the Docker image from Docker Hub:
+```
+docker pull VadimBoev/freegpt-webui-v2
+```
+
+Run the application using Docker:
+```
+docker run -p 1338:1338 VadimBoev/freegpt-webui-v2
+```
+
+Access the application in your browser using the URL:
+```
+http://127.0.0.1:1338
+```
+or
+```
+http://localhost:1338
+```
+
+When you're done using the application, stop the Docker containers using the following command:
+```
+docker stop <container-id>
 ```
 
 ## Incorporated Projects :busts_in_silhouette:
