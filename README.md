@@ -15,7 +15,6 @@ You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 
 ## Known bugs 🚧
 - Stream mode not working properly.
-- At the moment, only gpt 3.5 turbo works, but I think I will fix it in the future
 - Docker is missing (possibly temporarily)
 - Operation timed out after 30000 milliseconds
 - Web Access is not working.  
