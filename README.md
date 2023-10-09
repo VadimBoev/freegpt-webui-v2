@@ -89,12 +89,12 @@ Before you start, make sure you have installed [Docker](https://www.docker.com/g
 ### Running the Docker
 Pull the Docker image from Docker Hub:
 ```
-docker pull VadimBoev/freegpt-webui-v2
+docker pull vadimboev/freegpt-webui-v2
 ```
 
 Run the application using Docker:
 ```
-docker run -p 1338:1338 VadimBoev/freegpt-webui-v2
+docker run -p 1338:1338 vadimboev/freegpt-webui-v2
 ```
 
 Access the application in your browser using the URL:
