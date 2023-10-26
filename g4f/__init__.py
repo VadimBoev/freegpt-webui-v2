@@ -6,7 +6,7 @@ from .typing    import Messages, CreateResult, Union, List
 from .          import debug
 
 version       = '0.1.7.7'
-version_check = True
+version_check = False
 
 def check_pypi_version() -> None:
     try:
