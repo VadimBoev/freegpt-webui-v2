@@ -7,7 +7,7 @@ from .Ails            import Ails
 from .AItianhu        import AItianhu
 from .AItianhuSpace   import AItianhuSpace
 from .Bing            import Bing
-from .ChatBase        import ChatBase
+#from .ChatBase        import ChatBase
 from .ChatForAi       import ChatForAi
 from .Chatgpt4Online  import Chatgpt4Online
 from .ChatgptAi       import ChatgptAi
@@ -59,7 +59,7 @@ class ProviderUtils:
         'Bard': Bard,
         'BaseProvider': BaseProvider,
         'Bing': Bing,
-        'ChatBase': ChatBase,
+        #'ChatBase': ChatBase,
         'ChatForAi': ChatForAi,
         'Chatgpt4Online': Chatgpt4Online,
         'ChatgptAi': ChatgptAi,
@@ -134,7 +134,7 @@ __all__ = [
     'Aivvm',
     'Bard',
     'Bing',
-    'ChatBase',
+    #'ChatBase',
     'ChatForAi',
     'Chatgpt4Online',
     'ChatgptAi',
