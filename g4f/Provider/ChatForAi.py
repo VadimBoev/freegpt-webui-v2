@@ -1,27 +1,38 @@
 from __future__ import annotations
 
-from ..typing import AsyncGenerator
+import time
+import hashlib
+
+from ..typing import AsyncResult, Messages
 from ..requests import StreamSession
 from .base_provider import AsyncGeneratorProvider
 
 
 class ChatForAi(AsyncGeneratorProvider):
-    url                   = "https://chatforai.com"
-    supports_gpt_35_turbo = True
+    url                   = "https://chatforai.store"
     working               = True
+    supports_gpt_35_turbo = True
 
     @classmethod
     async def create_async_generator(
         cls,
         model: str,
-        messages: list[dict[str, str]],
-        timeout: int = 30,
+        messages: Messages,
+        proxy: str = None,
+        timeout: int = 120,
         **kwargs
-    ) -> AsyncGenerator:
-        async with StreamSession(impersonate="chrome107", timeout=timeout) as session:
+    ) -> AsyncResult:
+        headers = {
+            "Content-Type": "text/plain;charset=UTF-8",
+            "Origin": cls.url,
+            "Referer": f"{cls.url}/?r=b",
+        }
+        async with StreamSession(impersonate="chrome107", headers=headers, proxies={"https": proxy}, timeout=timeout) as session:
             prompt = messages[-1]["content"]
+            timestamp = int(time.time() * 1e3)
+            conversation_id = f"id_{timestamp-123}"
             data = {
-                "conversationId": "temp",
+                "conversationId": conversation_id,
                 "conversationType": "chat_continuous",
                 "botId": "chat_continuous",
                 "globalSettings":{
@@ -35,10 +46,14 @@ class ChatForAi(AsyncGeneratorProvider):
                 "botSettings": {},
                 "prompt": prompt,
                 "messages": messages,
+                "timestamp": timestamp,
+                "sign": generate_signature(timestamp, prompt, conversation_id)
             }
             async with session.post(f"{cls.url}/api/handle/provider-openai", json=data) as response:
                 response.raise_for_status()
                 async for chunk in response.iter_content():
+                    if b"https://chatforai.store" in chunk:
+                        raise RuntimeError(f"Response: {chunk.decode()}")
                     yield chunk.decode()
 
     @classmethod
@@ -51,3 +66,7 @@ class ChatForAi(AsyncGeneratorProvider):
         ]
         param = ", ".join([": ".join(p) for p in params])
         return f"g4f.provider.{cls.__name__} supports: ({param})"
+    
+def generate_signature(timestamp: int, message: str, id: str):
+    buffer = f"{timestamp}:{id}:{message}:7YN8z6d6"
+    return hashlib.sha256(buffer.encode()).hexdigest()

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from ..typing import Messages
 from curl_cffi.requests import AsyncSession
 from .base_provider import AsyncProvider, format_prompt
 
@@ -7,15 +8,15 @@ from .base_provider import AsyncProvider, format_prompt
 class ChatgptDuo(AsyncProvider):
     url                   = "https://chatgptduo.com"
     supports_gpt_35_turbo = True
-    working               = True
+    working               = False
 
     @classmethod
     async def create_async(
         cls,
         model: str,
-        messages: list[dict[str, str]],
+        messages: Messages,
         proxy: str = None,
-        timeout: int = 30,
+        timeout: int = 120,
         **kwargs
     ) -> str:
         async with AsyncSession(

@@ -1,74 +1,75 @@
 from __future__ import annotations
 
-import os, re
+import re
+import time
+import json
 from aiohttp import ClientSession
 
-from .base_provider import AsyncProvider, format_prompt
+from ..typing import AsyncResult, Messages
+from .base_provider import AsyncGeneratorProvider
+from .helper import format_prompt
 
 
-class ChatgptLogin(AsyncProvider):
-    url                   = "https://opchatgpts.net"
+class ChatgptLogin(AsyncGeneratorProvider):
+    url                   = "https://chatgptlogin.ai"
     supports_gpt_35_turbo = True
-    working               = True
-    _nonce                = None
+    working               = False
+    _user_id              = None
 
     @classmethod
-    async def create_async(
+    async def create_async_generator(
         cls,
         model: str,
-        messages: list[dict[str, str]],
+        messages: Messages,
+        proxy: str = None,
         **kwargs
-    ) -> str:
+    ) -> AsyncResult:
         headers = {
-            "User-Agent"         : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
-            "Accept"             : "*/*",
-            "Accept-language"    : "en,fr-FR;q=0.9,fr;q=0.8,es-ES;q=0.7,es;q=0.6,en-US;q=0.5,am;q=0.4,de;q=0.3",
-            "Origin"             : "https://opchatgpts.net",
-            "Alt-Used"           : "opchatgpts.net",
-            "Referer"            : "https://opchatgpts.net/chatgpt-free-use/",
-            "Sec-Fetch-Dest"     : "empty",
-            "Sec-Fetch-Mode"     : "cors",
-            "Sec-Fetch-Site"     : "same-origin",
+            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0",
+            "Accept": "*/*",
+            "Accept-Language": "de,en-US;q=0.7,en;q=0.3",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Referer": f"{cls.url}/chat/",
+            "Content-Type": "application/json",
+            "Origin": cls.url,
+            "Alt-Used": "chatgptlogin.ai",
+            "Connection": "keep-alive",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "Pragma": "no-cache",
+            "Cache-Control": "no-cache"
         }
-        async with ClientSession(
-            headers=headers
-        ) as session:
-            if not cls._nonce:
-                async with session.get(
-                    "https://opchatgpts.net/chatgpt-free-use/",
-                    params={"id": os.urandom(6).hex()},
-                ) as response:
-                    result = re.search(r'data-nonce="(.*?)"', await response.text())
-                if not result:
-                    raise RuntimeError("No nonce value")
-                cls._nonce = result.group(1)
-            data = {
-                "_wpnonce": cls._nonce,
-                "post_id": 28,
-                "url": "https://opchatgpts.net/chatgpt-free-use",
-                "action": "wpaicg_chat_shortcode_message",
-                "message": format_prompt(messages),
-                "bot_id": 0
-            }
-            async with session.post("https://opchatgpts.net/wp-admin/admin-ajax.php", data=data) as response:
-                response.raise_for_status()
-                data = await response.json()
-                if "data" in data:
-                    return data["data"]
-                elif "msg" in data:
-                    raise RuntimeError(data["msg"])
+        async with ClientSession(headers=headers) as session:
+            if not cls._user_id:
+                async with session.get(f"{cls.url}/chat/", proxy=proxy) as response:
+                    response.raise_for_status()
+                    response = await response.text()
+                if result := re.search(
+                    r'<div id="USERID" style="display: none">(.*?)<\/div>',
+                    response,
+                ):
+                    cls._user_id = result.group(1)
                 else:
-                    raise RuntimeError(f"Response: {data}")
-
-
-    @classmethod
-    @property
-    def params(cls):
-        params = [
-            ("model", "str"),
-            ("messages", "list[dict[str, str]]"),
-            ("stream", "bool"),
-            ("temperature", "float"),
-        ]
-        param = ", ".join([": ".join(p) for p in params])
-        return f"g4f.provider.{cls.__name__} supports: ({param})"
+                    raise RuntimeError("No user id found")
+            async with session.post(f"{cls.url}/chat/new_chat", json={"user_id": cls._user_id}, proxy=proxy) as response:
+                response.raise_for_status()
+                chat_id = (await response.json())["id_"]
+            if not chat_id:
+                raise RuntimeError("Could not create new chat")
+            prompt = format_prompt(messages)
+            data = {
+                "question": prompt,
+                "chat_id": chat_id,
+                "timestamp": int(time.time() * 1e3),
+            }
+            async with session.post(f"{cls.url}/chat/chat_api_stream", json=data, proxy=proxy) as response:
+                response.raise_for_status()
+                async for line in response.content:
+                    if line.startswith(b"data: "):
+                        if content := json.loads(line[6:])["choices"][0][
+                            "delta"
+                        ].get("content"):
+                            yield content
+            async with session.post(f"{cls.url}/chat/delete_chat", json={"chat_id": chat_id}, proxy=proxy) as response:
+                response.raise_for_status()

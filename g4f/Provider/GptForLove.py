@@ -3,7 +3,7 @@ from __future__ import annotations
 from aiohttp import ClientSession
 import execjs, os, json
 
-from ..typing import AsyncGenerator
+from ..typing import AsyncResult, Messages
 from .base_provider import AsyncGeneratorProvider
 from .helper import format_prompt
 
@@ -16,9 +16,10 @@ class GptForLove(AsyncGeneratorProvider):
     async def create_async_generator(
         cls,
         model: str,
-        messages: list[dict[str, str]],
+        messages: Messages,
+        proxy: str = None,
         **kwargs
-    ) -> AsyncGenerator:
+    ) -> AsyncResult:
         if not model:
             model = "gpt-3.5-turbo"
         headers = {
@@ -41,13 +42,12 @@ class GptForLove(AsyncGeneratorProvider):
             data = {
                 "prompt": prompt,
                 "options": {},
-                "systemMessage": "You are ChatGPT, the version is GPT3.5, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.",
-                "temperature": 0.8,
-                "top_p": 1,
+                "systemMessage": kwargs.get("system_message", "You are ChatGPT, the version is GPT3.5, a large language model trained by OpenAI. Follow the user's instructions carefully."),
+                "temperature": kwargs.get("temperature", 0.8),
+                "top_p": kwargs.get("top_p", 1),
                 "secret": get_secret(),
-                **kwargs
             }
-            async with session.post("https://api.gptplus.one/chat-process", json=data) as response:
+            async with session.post("https://api.gptplus.one/chat-process", json=data, proxy=proxy) as response:
                 response.raise_for_status()
                 async for line in response.content:
                     try:
@@ -55,8 +55,9 @@ class GptForLove(AsyncGeneratorProvider):
                     except:
                         raise RuntimeError(f"Broken line: {line}")
                     if "detail" in line:
-                        content = line["detail"]["choices"][0]["delta"].get("content")
-                        if content:
+                        if content := line["detail"]["choices"][0]["delta"].get(
+                            "content"
+                        ):
                             yield content
                     elif "10分钟内提问超过了5次" in line:
                         raise RuntimeError("Rate limit reached")
@@ -66,9 +67,9 @@ class GptForLove(AsyncGeneratorProvider):
 
 def get_secret() -> str:
     dir = os.path.dirname(__file__)
-    dir += '/npm/node_modules/crypto-js'
+    include = f'{dir}/npm/node_modules/crypto-js/crypto-js'
     source = """
-CryptoJS = require('{dir}/crypto-js')
+CryptoJS = require({include})
 var k = '14487141bvirvvG'
     , e = Math.floor(new Date().getTime() / 1e3);
 var t = CryptoJS.enc.Utf8.parse(e)
@@ -78,5 +79,5 @@ var t = CryptoJS.enc.Utf8.parse(e)
 });
 return o.toString()
 """
-    source = source.replace('{dir}', dir)
+    source = source.replace('{include}', json.dumps(include))
     return execjs.compile(source).call('')

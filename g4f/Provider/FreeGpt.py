@@ -2,13 +2,12 @@ from __future__ import annotations
 
 import time, hashlib, random
 
-from ..typing import AsyncGenerator
+from ..typing import AsyncResult, Messages
 from ..requests import StreamSession
 from .base_provider import AsyncGeneratorProvider
 
 domains = [
-    'https://k.aifree.site',
-    'https://p.aifree.site'
+    'https://s.aifree.site'
 ]
 
 class FreeGpt(AsyncGeneratorProvider):
@@ -20,11 +19,16 @@ class FreeGpt(AsyncGeneratorProvider):
     async def create_async_generator(
         cls,
         model: str,
-        messages: list[dict[str, str]],
-        timeout: int = 30,
+        messages: Messages,
+        proxy: str = None,
+        timeout: int = 120,
         **kwargs
-    ) -> AsyncGenerator:
-        async with StreamSession(impersonate="chrome107", timeout=timeout) as session:
+    ) -> AsyncResult:
+        async with StreamSession(
+            impersonate="chrome107",
+            timeout=timeout,
+            proxies={"https": proxy}
+        ) as session:
             prompt = messages[-1]["content"]
             timestamp = int(time.time())
             data = {
@@ -37,7 +41,10 @@ class FreeGpt(AsyncGeneratorProvider):
             async with session.post(f"{url}/api/generate", json=data) as response:
                 response.raise_for_status()
                 async for chunk in response.iter_content():
-                    yield chunk.decode()
+                    chunk = chunk.decode()
+                    if chunk == "当前地区当日额度已消耗完":
+                        raise RuntimeError("Rate limit reached")
+                    yield chunk
 
     @classmethod
     @property

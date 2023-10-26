@@ -4,7 +4,7 @@ import uuid
 
 from aiohttp import ClientSession
 
-from ..typing import AsyncGenerator
+from ..typing import AsyncResult, Messages
 from .base_provider import AsyncGeneratorProvider
 
 models = {
@@ -39,17 +39,17 @@ class Liaobots(AsyncGeneratorProvider):
     async def create_async_generator(
         cls,
         model: str,
-        messages: list[dict[str, str]],
+        messages: Messages,
         auth: str = None,
         proxy: str = None,
         **kwargs
-    ) -> AsyncGenerator:
+    ) -> AsyncResult:
         model = model if model in models else "gpt-3.5-turbo"
         headers = {
             "authority": "liaobots.com",
             "content-type": "application/json",
             "origin": cls.url,
-            "referer": cls.url + "/",
+            "referer": f"{cls.url}/",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
         }
         async with ClientSession(
