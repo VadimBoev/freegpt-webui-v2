@@ -3,32 +3,25 @@ from dataclasses import dataclass
 from .typing     import Union
 from .Provider   import BaseProvider, RetryProvider
 from .Provider   import (
-    AItianhuSpace,
-    ChatgptLogin,
-    ChatgptDemo,
-    ChatgptDuo,
-    Vitalentum,
+    GptForLove,
     ChatgptAi,
-    ChatForAi,
-    AItianhu,
+    GptChatly,
+    ChatgptX,
     ChatBase,
-    Liaobots,
-    Yqcloud,
-    Myshell,
+    GeekGpt,
+    FakeGpt,
     FreeGpt,
+    NoowAi,
     Vercel, 
-    DeepAi,
     Aichat,
     GPTalk,
-    GptGod,
     AiAsk,
     GptGo,
-    Ylokh,
+    Phind,
     Bard, 
-    Aibn,
     Bing,
     You,
-    H2o
+    H2o,
 )
 
 @dataclass(unsafe_hash=True)
@@ -36,16 +29,18 @@ class Model:
     name: str
     base_provider: str
     best_provider: Union[type[BaseProvider], RetryProvider] = None
+    
+    @staticmethod
+    def __all__() -> list[str]:
+        return _all_models
 
 default = Model(
     name          = "",
     base_provider = "",
     best_provider = RetryProvider([
         Bing,         # Not fully GPT 3 or 4
-        Yqcloud,      # Answers short questions in chinese
-        ChatBase,     # Don't want to answer creatively
-        ChatgptDuo,   # Include search results
-        Aibn, Aichat, ChatForAi, ChatgptAi, ChatgptLogin, DeepAi, FreeGpt, GptGo, Myshell, Ylokh,
+        AiAsk, Aichat, ChatgptAi, FreeGpt, GptGo, GeekGpt,
+        Phind, You
     ])
 )
 
@@ -54,9 +49,10 @@ gpt_35_long = Model(
     name          = 'gpt-3.5-turbo',
     base_provider = 'openai',
     best_provider = RetryProvider([
-        AiAsk, Aibn, Aichat, ChatForAi, ChatgptAi, ChatgptDemo, ChatgptDuo,
-        FreeGpt, GptGo, Liaobots, Myshell, Vitalentum, Ylokh, You, Yqcloud,
-        GPTalk, GptGod
+        AiAsk, Aichat, FreeGpt, You,
+        GptChatly, GptForLove,
+        NoowAi, GeekGpt, Phind,
+        FakeGpt
     ])
 )
 
@@ -64,15 +60,18 @@ gpt_35_long = Model(
 gpt_35_turbo = Model(
     name          = 'gpt-3.5-turbo',
     base_provider = 'openai',
-    best_provider = RetryProvider([
-        DeepAi, ChatgptLogin, ChatgptAi, GptGo, AItianhu, Aichat, AItianhuSpace, Myshell, Aibn, ChatForAi, FreeGpt, Ylokh
+    best_provider=RetryProvider([
+        ChatgptX, GptGo, You, 
+        NoowAi, GPTalk, GptForLove, Phind, ChatBase
     ])
 )
 
 gpt_4 = Model(
     name          = 'gpt-4',
     base_provider = 'openai',
-    best_provider = Bing
+    best_provider = RetryProvider([
+        Bing, GeekGpt, Phind
+    ])
 )
 
 # Bard
@@ -161,30 +160,36 @@ code_davinci_002 = Model(
 gpt_35_turbo_16k = Model(
     name          = 'gpt-3.5-turbo-16k',
     base_provider = 'openai',
-    best_provider = Vercel)
+    best_provider = gpt_35_long.best_provider)
 
 gpt_35_turbo_16k_0613 = Model(
     name          = 'gpt-3.5-turbo-16k-0613',
-    base_provider = 'openai')
+    base_provider = 'openai',
+    best_provider = gpt_35_long.best_provider
+)
 
 gpt_35_turbo_0613 = Model(
     name          = 'gpt-3.5-turbo-0613',
-    base_provider = 'openai'
+    base_provider = 'openai',
+    best_provider = gpt_35_turbo.best_provider
 )
 
 gpt_4_0613 = Model(
     name          = 'gpt-4-0613',
-    base_provider = 'openai'
+    base_provider = 'openai',
+    best_provider = gpt_4.best_provider
 )
 
 gpt_4_32k = Model(
     name          = 'gpt-4-32k',
-    base_provider = 'openai'
+    base_provider = 'openai',
+    best_provider = gpt_4.best_provider
 )
 
 gpt_4_32k_0613 = Model(
     name          = 'gpt-4-32k-0613',
-    base_provider = 'openai'
+    base_provider = 'openai',
+    best_provider = gpt_4.best_provider
 )
 
 text_ada_001 = Model(
@@ -222,6 +227,11 @@ llama7b_v2_chat = Model(
     base_provider = 'replicate',
     best_provider = Vercel)
 
+llama70b_v2_chat = Model(
+    name          = 'replicate/llama70b-v2-chat',
+    base_provider = 'replicate',
+    best_provider = Vercel)
+
 
 class ModelUtils:
     convert: dict[str, Model] = {
@@ -251,9 +261,9 @@ class ModelUtils:
         'llama-13b'  : llama_13b,
         
         # Vercel
-        'claude-instant-v1' : claude_instant_v1,
-        'claude-v1'         : claude_v1,
-        'claude-v2'         : claude_v2,
+        #'claude-instant-v1' : claude_instant_v1,
+        #'claude-v1'         : claude_v1,
+        #'claude-v2'         : claude_v2,
         'command-nightly'   : command_nightly,
         'gpt-neox-20b'      : gpt_neox_20b,
         'santacoder'        : santacoder,
@@ -265,6 +275,7 @@ class ModelUtils:
         'text-curie-001'    : text_curie_001,
         'text-davinci-002'  : text_davinci_002,
         'text-davinci-003'  : text_davinci_003,
+        'llama70b-v2-chat'  : llama70b_v2_chat,
         'llama13b-v2-chat'  : llama13b_v2_chat,
         'llama7b-v2-chat'   : llama7b_v2_chat,
         
@@ -272,3 +283,5 @@ class ModelUtils:
         'oasst-sft-4-pythia-12b-epoch-3.5' : oasst_sft_4_pythia_12b_epoch_35,
         'command-light-nightly'            : command_light_nightly,
     }
+
+_all_models = list(ModelUtils.convert.keys())
