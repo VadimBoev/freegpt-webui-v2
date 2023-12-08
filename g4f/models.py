@@ -3,25 +3,31 @@ from dataclasses import dataclass
 from .typing     import Union
 from .Provider   import BaseProvider, RetryProvider
 from .Provider   import (
+    Chatgpt4Online,
+    ChatgptDemoAi,
+    ChatAnywhere,
+    ChatgptNext,
+    HuggingChat,
     GptForLove,
     ChatgptAi,
-    GptChatly,
-    ChatgptX,
+    DeepInfra,
+    OnlineGpt,
     ChatBase,
+    Liaobots,
     GeekGpt,
     FakeGpt,
     FreeGpt,
-    NoowAi,
+    Berlin,
+    Llama2,
     Vercel, 
-    Aichat,
-    GPTalk,
-    AiAsk,
-    GptGo,
     Phind,
+    Koala,
+    GptGo,
     Bard, 
     Bing,
     You,
     H2o,
+    Pi,
 )
 
 @dataclass(unsafe_hash=True)
@@ -38,21 +44,27 @@ default = Model(
     name          = "",
     base_provider = "",
     best_provider = RetryProvider([
-        Bing,         # Not fully GPT 3 or 4
-        AiAsk, Aichat, ChatgptAi, FreeGpt, GptGo, GeekGpt,
-        Phind, You
+        Bing,
+        ChatgptAi, GptGo, GeekGpt,
+        You,
+        Chatgpt4Online,
+        ChatAnywhere,
     ])
 )
 
-# GPT-3.5 too, but all providers supports long responses and a custom timeouts
+# GPT-3.5 too, but all providers supports long requests and responses
 gpt_35_long = Model(
     name          = 'gpt-3.5-turbo',
     base_provider = 'openai',
     best_provider = RetryProvider([
-        AiAsk, Aichat, FreeGpt, You,
-        GptChatly, GptForLove,
-        NoowAi, GeekGpt, Phind,
-        FakeGpt
+        FreeGpt, You,
+        GeekGpt, FakeGpt,
+        Berlin, Koala,
+        Chatgpt4Online,
+        ChatAnywhere,
+        ChatgptDemoAi,
+        OnlineGpt,
+        ChatgptNext,
     ])
 )
 
@@ -61,8 +73,10 @@ gpt_35_turbo = Model(
     name          = 'gpt-3.5-turbo',
     base_provider = 'openai',
     best_provider=RetryProvider([
-        ChatgptX, GptGo, You, 
-        NoowAi, GPTalk, GptForLove, Phind, ChatBase
+        GptGo, You, 
+        GptForLove, ChatBase,
+        Chatgpt4Online,
+        ChatAnywhere,
     ])
 )
 
@@ -70,9 +84,24 @@ gpt_4 = Model(
     name          = 'gpt-4',
     base_provider = 'openai',
     best_provider = RetryProvider([
-        Bing, GeekGpt, Phind
+        Bing, Phind, Liaobots
     ])
 )
+
+llama2_7b = Model(
+    name          = "meta-llama/Llama-2-7b-chat-hf",
+    base_provider = 'huggingface',
+    best_provider = RetryProvider([Llama2, DeepInfra]))
+
+llama2_13b = Model(
+    name          = "meta-llama/Llama-2-13b-chat-hf",
+    base_provider = 'huggingface',
+    best_provider = RetryProvider([Llama2, DeepInfra]))
+
+llama2_70b = Model(
+    name          = "meta-llama/Llama-2-70b-chat-hf",
+    base_provider = "huggingface",
+    best_provider = RetryProvider([Llama2, DeepInfra, HuggingChat]))
 
 # Bard
 palm = Model(
@@ -232,6 +261,11 @@ llama70b_v2_chat = Model(
     base_provider = 'replicate',
     best_provider = Vercel)
 
+pi = Model(
+    name = 'pi',
+    base_provider = 'inflection',
+    best_provider=Pi
+)
 
 class ModelUtils:
     convert: dict[str, Model] = {
@@ -241,11 +275,18 @@ class ModelUtils:
         'gpt-3.5-turbo-16k'      : gpt_35_turbo_16k,
         'gpt-3.5-turbo-16k-0613' : gpt_35_turbo_16k_0613,
         
+        'gpt-3.5-long': gpt_35_long,
+        
         # gpt-4
         'gpt-4'          : gpt_4,
         'gpt-4-0613'     : gpt_4_0613,
         'gpt-4-32k'      : gpt_4_32k,
         'gpt-4-32k-0613' : gpt_4_32k_0613,
+
+        # Llama 2
+        'llama2-7b' : llama2_7b,
+        'llama2-13b': llama2_13b,
+        'llama2-70b': llama2_70b,
         
         # Bard
         'palm2'       : palm,
@@ -282,6 +323,8 @@ class ModelUtils:
         'oasst-sft-1-pythia-12b'           : oasst_sft_1_pythia_12b,
         'oasst-sft-4-pythia-12b-epoch-3.5' : oasst_sft_4_pythia_12b_epoch_35,
         'command-light-nightly'            : command_light_nightly,
+
+        'pi': pi
     }
 
 _all_models = list(ModelUtils.convert.keys())
