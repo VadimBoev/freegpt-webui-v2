@@ -62,6 +62,7 @@ const ask_gpt = async (message) => {
 
 		jailbreak = document.getElementById("jailbreak");
 		model = document.getElementById("model");
+		provider = document.getElementById("provider");
 		prompt_lock = true;
 		window.text = ``;
 		window.token = message_id();
@@ -102,6 +103,7 @@ const ask_gpt = async (message) => {
 				conversation_id: window.conversation_id,
 				action: `_ask`,
 				model: model.options[model.selectedIndex].value,
+				provider: provider.options[provider.selectedIndex].value,
 				jailbreak: jailbreak.options[jailbreak.selectedIndex].value,
 				meta: {
 					id: window.token,
@@ -506,3 +508,22 @@ function createElement(tag, { classNames, id, innerHTML, textContent } = {}) {
 	}
 	return el;
 }
+
+(async () => {
+    response = await fetch('/backend-api/v2/providers')
+    providers = await response.json()
+    
+    //let select = document.getElementById('provider');
+    //select.textContent = '';
+	//
+    //let auto = document.createElement('option');
+    //auto.value = '';
+    //auto.text = 'Provider: Auto';
+    //select.appendChild(auto);
+	//
+    //for (provider of providers) {
+    //    let option = document.createElement('option');
+    //    option.value = option.text = provider;
+    //    select.appendChild(option);
+    //}
+})();
