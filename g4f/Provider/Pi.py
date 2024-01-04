@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from ..typing import CreateResult, Messages
-from .base_provider import BaseProvider, format_prompt
-
 import json
+
+from ..typing import CreateResult, Messages
+from .base_provider import AbstractProvider, format_prompt
 from ..requests import Session, get_session_from_browser
 
-class Pi(BaseProvider):
+class Pi(AbstractProvider):
     url             = "https://pi.ai/talk"
     working         = True
     supports_stream = True
@@ -27,7 +27,10 @@ class Pi(BaseProvider):
             session = get_session_from_browser(url=cls.url, proxy=proxy, timeout=timeout)
         if not conversation_id:
             conversation_id = cls.start_conversation(session)
-        answer = cls.ask(session, messages, conversation_id)
+            prompt = format_prompt(messages)
+        else:
+            prompt = messages[-1]["content"]
+        answer = cls.ask(session, prompt, conversation_id)
         for line in answer:
             if "text" in line:
                 yield line["text"]
@@ -51,9 +54,9 @@ class Pi(BaseProvider):
             raise RuntimeError('Error: Cloudflare detected')
         return response.json()
 
-    def ask(session: Session, messages: Messages, conversation_id: str):
+    def ask(session: Session, prompt: str, conversation_id: str):
         json_data = {
-            'text': format_prompt(messages),
+            'text': prompt,
             'conversation': conversation_id,
             'mode': 'BASE',
         }
