@@ -4,7 +4,9 @@ import asyncio
 
 import sys
 sys.path.insert(0, '../g4f')
+import g4f
 from g4f import __init__, ChatCompletion
+from g4f.Provider import __providers__
 
 from flask import request, Response, stream_with_context
 from requests import get
@@ -12,6 +14,16 @@ from server.config import special_instructions
 import json
 import subprocess
 import platform
+
+def find_provider(name):
+    new_variable = None
+    for provider in __providers__:
+        if provider.__name__ == name and provider.working:
+            new_variable = provider
+            break
+        #else:
+        #    print("name " + provider.__name__)
+    return new_variable
 
 class Backend_Api:
     def __init__(self, bp, config: dict) -> None:
@@ -40,16 +52,23 @@ class Backend_Api:
             jailbreak = request.json['jailbreak']
             model = request.json['model']
             messages = build_messages(jailbreak)
+            provider = request.json.get('provider', '').replace('g4f.Provider.', '')
+            print("provider " + provider)
+            provider = provider if provider and provider != "Auto" else None
+            
+            provider_class = find_provider(provider)
             
             #The error "There is no current event loop in thread" was fixed in 0.1.4.3
             #its fix for Windows
             #if platform.system() == "Windows":
             #    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
+            
             response = ChatCompletion.create(
                 model=model,
+                provider=provider_class,
                 chatId=conversation_id,
-                messages=messages
+                messages=messages,
+                stream=True
             )
             
             return Response(stream_with_context(generate_stream(response, jailbreak)), mimetype='text/event-stream')
