@@ -14,10 +14,6 @@ We will solve a question or a problem together! 🌍
 You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 
 ## Known bugs 🚧
-- Stream mode not working properly.
-- Operation timed out after 30000 milliseconds.  
-The problem is in the timeout of curl. There is not always an error, often it can be seen if you ask gpt to send you some large text in Russian and then there will be an error with an 80% chance.
-As you know, GPT prints slowly in Russian, so there is a risk of getting a timeout of 30 seconds.
 - Web Access is not working.  
 Because the API that was used earlier in the "freegpt-webui" repository from ramonvc stopped working. This will be fixed later
 
