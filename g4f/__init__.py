@@ -1,56 +1,60 @@
 from __future__ import annotations
-from requests   import get
-from .models    import Model, ModelUtils, _all_models
-from .Provider  import BaseProvider, AsyncGeneratorProvider, RetryProvider
-from .typing    import Messages, CreateResult, AsyncResult, Union, List
-from .          import debug
 
-version       = '0.1.9.2'
-version_check = True
+import os
 
-def check_pypi_version() -> None:
-    try:
-        response = get("https://pypi.org/pypi/g4f/json").json()
-        latest_version = response["info"]["version"]
-
-        if version != latest_version:
-            print(f'New pypi version: {latest_version} (current: {version}) | pip install -U g4f')
-            return False
-        return True
-
-    except Exception as e:
-        print(f'Failed to check g4f pypi version: {e}')
+from .errors   import *
+from .models   import Model, ModelUtils, _all_models
+from .Provider import AsyncGeneratorProvider, ProviderUtils
+from .typing   import Messages, CreateResult, AsyncResult, Union
+from .         import debug, version
+from .base_provider import BaseRetryProvider, ProviderType
 
 def get_model_and_provider(model    : Union[Model, str], 
-                           provider : Union[type[BaseProvider], None], 
+                           provider : Union[ProviderType, str, None], 
                            stream   : bool,
-                           ignored  : List[str] = None,
+                           ignored  : list[str] = None,
                            ignore_working: bool = False,
-                           ignore_stream: bool = False) -> tuple[Model, type[BaseProvider]]:
-    
-    if isinstance(model, str):
-        if model in ModelUtils.convert:
-            model = ModelUtils.convert[model]
+                           ignore_stream: bool = False) -> tuple[str, ProviderType]:
+    if debug.version_check:
+        debug.version_check = False
+        version.utils.check_pypi_version()
+       
+    if isinstance(provider, str):
+        if provider in ProviderUtils.convert:
+            provider = ProviderUtils.convert[provider]
         else:
-            raise ValueError(f'The model: {model} does not exist')
+            raise ProviderNotFoundError(f'Provider not found: {provider}')
 
     if not provider:
+        if isinstance(model, str):
+            if model in ModelUtils.convert:
+                model = ModelUtils.convert[model]
+            else:
+                raise ModelNotFoundError(f'Model not found: {model}')
         provider = model.best_provider
 
-    if isinstance(provider, RetryProvider) and ignored:
+    if not provider:
+        raise ProviderNotFoundError(f'No provider found for model: {model}')
+    
+    if isinstance(model, Model):
+        model = model.name
+
+    if ignored and isinstance(provider, BaseRetryProvider):
         provider.providers = [p for p in provider.providers if p.__name__ not in ignored]
 
-    if not provider:
-        raise RuntimeError(f'No provider found for model: {model}')
-
-    if not provider.working and not ignore_working:
-        raise RuntimeError(f'{provider.__name__} is not working')
-
+    if not ignore_working and not provider.working:
+        raise ProviderNotWorkingError(f'{provider.__name__} is not working')
+    
     if not ignore_stream and not provider.supports_stream and stream:
-        raise ValueError(f'{provider.__name__} does not support "stream" argument')
-
+        raise StreamNotSupportedError(f'{provider.__name__} does not support "stream" argument')
+    
     if debug.logging:
-        print(f'Using {provider.__name__} provider')
+        if model:
+            print(f'Using {provider.__name__} provider and {model} model')
+        else:
+            print(f'Using {provider.__name__} provider')
+
+    debug.last_provider = provider
 
     return model, provider
 
@@ -58,10 +62,10 @@ class ChatCompletion:
     @staticmethod
     def create(model    : Union[Model, str],
                messages : Messages,
-               provider : Union[type[BaseProvider], None] = None,
+               provider : Union[ProviderType, str, None] = None,
                stream   : bool = False,
                auth     : Union[str, None] = None,
-               ignored  : List[str] = None, 
+               ignored  : list[str] = None, 
                ignore_working: bool = False,
                ignore_stream_and_auth: bool = False,
                **kwargs) -> Union[CreateResult, str]:
@@ -69,38 +73,43 @@ class ChatCompletion:
         model, provider = get_model_and_provider(model, provider, stream, ignored, ignore_working, ignore_stream_and_auth)
 
         if not ignore_stream_and_auth and provider.needs_auth and not auth:
-            raise ValueError(
-                f'{provider.__name__} requires authentication (use auth=\'cookie or token or jwt ...\' param)')
+            raise AuthenticationRequiredError(f'{provider.__name__} requires authentication (use auth=\'cookie or token or jwt ...\' param)')
 
         if auth:
             kwargs['auth'] = auth
+        
+        if "proxy" not in kwargs:
+            proxy = os.environ.get("G4F_PROXY")
+            if proxy:
+                kwargs['proxy'] = proxy
 
-        result = provider.create_completion(model.name, messages, stream, **kwargs)
+        result = provider.create_completion(model, messages, stream, **kwargs)
         return result if stream else ''.join(result)
 
     @staticmethod
-    async def create_async(model    : Union[Model, str],
-                           messages : Messages,
-                           provider : Union[type[BaseProvider], None] = None,
-                           stream   : bool = False,
-                           ignored  : List[str] = None,
-                           **kwargs) -> Union[AsyncResult, str]:
+    def create_async(model    : Union[Model, str],
+                     messages : Messages,
+                     provider : Union[ProviderType, str, None] = None,
+                     stream   : bool = False,
+                     ignored  : list[str] = None,
+                     **kwargs) -> Union[AsyncResult, str]:
+
         model, provider = get_model_and_provider(model, provider, False, ignored)
 
         if stream:
             if isinstance(provider, type) and issubclass(provider, AsyncGeneratorProvider):
-                return await provider.create_async_generator(model.name, messages, **kwargs)
-            raise ValueError(f'{provider.__name__} does not support "stream" argument')
+                return provider.create_async_generator(model, messages, **kwargs)
+            raise StreamNotSupportedError(f'{provider.__name__} does not support "stream" argument in "create_async"')
 
-        return await provider.create_async(model.name, messages, **kwargs)
+        return provider.create_async(model, messages, **kwargs)
 
 class Completion:
     @staticmethod
     def create(model    : Union[Model, str],
                prompt   : str,
-               provider : Union[type[BaseProvider], None] = None,
+               provider : Union[ProviderType, None] = None,
                stream   : bool = False,
-               ignored  : List[str] = None, **kwargs) -> Union[CreateResult, str]:
+               ignored  : list[str] = None, **kwargs) -> Union[CreateResult, str]:
 
         allowed_models = [
             'code-davinci-002',
@@ -110,15 +119,19 @@ class Completion:
             'text-davinci-002',
             'text-davinci-003'
         ]
-
         if model not in allowed_models:
-            raise Exception(f'ValueError: Can\'t use {model} with Completion.create()')
+            raise ModelNotAllowedError(f'Can\'t use {model} with Completion.create()')
 
         model, provider = get_model_and_provider(model, provider, stream, ignored)
 
-        result = provider.create_completion(model.name, [{"role": "user", "content": prompt}], stream, **kwargs)
+        result = provider.create_completion(model, [{"role": "user", "content": prompt}], stream, **kwargs)
 
         return result if stream else ''.join(result)
     
-if version_check:
-    check_pypi_version()
+def get_last_provider(as_dict: bool = False) -> Union[ProviderType, dict[str, str]]:
+    last = debug.last_provider
+    if isinstance(last, BaseRetryProvider):
+        last = last.last_provider
+    if last and as_dict:
+        return {"name": last.__name__, "url": last.url}
+    return last
