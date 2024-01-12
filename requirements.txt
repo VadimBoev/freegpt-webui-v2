@@ -31,3 +31,4 @@ py-arkose-generator
 asyncstdlib
 async_property
 pybabel
+Brotli
