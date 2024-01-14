@@ -72,3 +72,15 @@ msgstr "वेब पहुंच"
 #:
 msgid "Version"
 msgstr "संस्करण"
+
+#:
+msgid "Model"
+msgstr "नमूना"
+
+#:
+msgid "Provider"
+msgstr "प्रदाता"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

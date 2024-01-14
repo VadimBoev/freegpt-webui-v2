@@ -72,3 +72,15 @@ msgstr "Webbåtkomst"
 #:
 msgid "Version"
 msgstr "Version"
+
+#:
+msgid "Model"
+msgstr "Modell"
+
+#:
+msgid "Provider"
+msgstr "Leverantör"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

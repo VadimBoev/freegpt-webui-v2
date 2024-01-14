@@ -72,3 +72,15 @@ msgstr "การเข้าถึงเว็บ"
 #:
 msgid "Version"
 msgstr "เวอร์ชัน"
+
+#:
+msgid "Model"
+msgstr "แบบอย่าง"
+
+#:
+msgid "Provider"
+msgstr "ผู้ให้บริการ"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

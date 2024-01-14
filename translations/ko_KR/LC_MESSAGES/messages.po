@@ -72,3 +72,15 @@ msgstr "웹 접근"
 #:
 msgid "Version"
 msgstr "버전"
+
+#:
+msgid "Model"
+msgstr "모델"
+
+#:
+msgid "Provider"
+msgstr "공급자"
+
+#:
+msgid "Jailbreak"
+msgstr "탈옥"

@@ -73,3 +73,15 @@ msgstr "Dostęp do sieci"
 #:
 msgid "Version"
 msgstr "Wersja"
+
+#:
+msgid "Model"
+msgstr "Model"
+
+#:
+msgid "Provider"
+msgstr "Dostawca"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

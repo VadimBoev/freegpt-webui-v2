@@ -72,3 +72,15 @@ msgstr "网络访问"
 #:
 msgid "Version"
 msgstr "版本"
+
+#:
+msgid "Model"
+msgstr "模型"
+
+#:
+msgid "Provider"
+msgstr "提供者"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

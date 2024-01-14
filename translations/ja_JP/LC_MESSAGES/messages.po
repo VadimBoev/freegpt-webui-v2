@@ -67,8 +67,20 @@ msgstr "悪"
 
 #:
 msgid "Web Access"
-msgstr "Webアクセス"
+msgstr "ウェブアクセス"
 
 #:
 msgid "Version"
 msgstr "バージョン"
+
+#:
+msgid "Model"
+msgstr "モデル"
+
+#:
+msgid "Provider"
+msgstr "プロバイダー"
+
+#:
+msgid "Jailbreak"
+msgstr "脱獄"
