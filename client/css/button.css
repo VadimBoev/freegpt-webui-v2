@@ -9,10 +9,15 @@
 	background: transparent;
 	cursor: pointer;
 }
+.theme-light .button {
+	border: 1px solid #66666612;
+	box-shadow: 2px 2px 2px #dbdbdb;
+}
 
 .button span {
 	color: var(--colour-3);
 	font-size: 0.875rem;
+	padding: 8px;
 }
 
 .button i::before {

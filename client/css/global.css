@@ -17,10 +17,10 @@
 	--colour-4: #949494;
 	--colour-5: #ebebeb;
 	--colour-6: #dadada;
-
 	--accent: #3a3a3a;
 	--blur-bg: #ffffff;
-	--blur-border: #dbdbdb;
+	--blur-border: 1px solid #66666612;
+	--blur-box-shadow: 2px 2px 2px #dbdbdb;
 	--user-input: #282828;
 	--conversations: #666666;
 }
@@ -44,6 +44,7 @@ html,
 body {
 	background: var(--colour-1);
 	color: var(--colour-3);
+	height: max(100%);
 }
 
 ol,
@@ -65,6 +66,12 @@ pre {
 
 @media screen and (max-height: 720px) {
 	:root {
+		--section-gap: 16px;
+	}
+}
+
+@media screen and (max-width: 990px) {
+	* {
 		--section-gap: 16px;
 	}
 }

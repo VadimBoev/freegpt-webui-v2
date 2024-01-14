@@ -2,9 +2,14 @@
 	border: 1px solid var(--conversations);
 }
 
+.theme-light .dropdown {
+	border: 1px solid #66666612;
+	box-shadow: 2px 2px 2px #dbdbdb;
+}
+
 @media screen and (max-width: 990px) {
 	.dropdown {
-		padding: 4px 8px;
+		padding: 8px 8px;
 		font-size: 0.75rem;
 	}
 }

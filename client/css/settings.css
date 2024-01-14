@@ -1,7 +1,8 @@
 .settings-container {
 	color: var(--colour-2);
 	margin: 24px 0px 8px 0px;
-	justify-content: center;
+	display: flex;
+	flex-direction: column;
 }
 
 .settings-container span {
@@ -40,5 +41,7 @@
 
 .settings-container .dropdown {
 	padding: 4px 8px;
+	margin-left: 6px;
 	font-size: 0.75rem;
+	width: max(70%);
 }

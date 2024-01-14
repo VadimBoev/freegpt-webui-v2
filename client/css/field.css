@@ -1,7 +1,7 @@
 .field {
 	display: flex;
 	align-items: center;
-	padding: 4px;
+	padding: 10px 0;
 }
 
 @media screen and (max-width: 990px) {
