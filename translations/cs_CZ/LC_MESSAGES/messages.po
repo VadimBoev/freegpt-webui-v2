@@ -72,3 +72,15 @@ msgstr "Webový přístup"
 #:
 msgid "Version"
 msgstr "Verze"
+
+#:
+msgid "Model"
+msgstr "Modelka"
+
+#:
+msgid "Provider"
+msgstr "Poskytovatel"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"
