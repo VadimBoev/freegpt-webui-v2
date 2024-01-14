@@ -72,3 +72,15 @@ msgstr "Πρόσβαση στον ιστό"
 #:
 msgid "Version"
 msgstr "Έκδοση"
+
+#:
+msgid "Model"
+msgstr "Μοντέλο"
+
+#:
+msgid "Provider"
+msgstr "Προμηθευτής"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"
