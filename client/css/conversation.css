@@ -81,7 +81,7 @@
 .box.input-box {
 	position: relative;
 	align-items: center;
-	padding: 0px 8px;
+	padding: 4px 8px;
 	cursor: pointer;
 	}
 
@@ -92,6 +92,8 @@
 		border-top: var(--blur-border);
 		display: flex;
 		flex-wrap: wrap;
+		align-content: flex-end;
+		align-items: flex-end;
 		}		
 }
 

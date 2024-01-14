@@ -4,7 +4,7 @@
 
 @media screen and (max-width: 990px) {
 	#message-input {
-		max-height: 20%;
+		max-height: 100%;
 	}
 }
 
