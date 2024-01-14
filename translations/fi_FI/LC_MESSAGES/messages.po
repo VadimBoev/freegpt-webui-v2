@@ -72,3 +72,15 @@ msgstr "Verkkopääsy"
 #:
 msgid "Version"
 msgstr "Versio"
+
+#:
+msgid "Model"
+msgstr "Malli"
+
+#:
+msgid "Provider"
+msgstr "Palveluntarjoaja"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"
