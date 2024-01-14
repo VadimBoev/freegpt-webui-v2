@@ -32,9 +32,7 @@
 @media screen and (max-width: 990px) {
 	.conversation .user-input {
 		margin-top: 0;
-		height: 12%;
-		max-height: 20%;	
-	}
+		}
 }
 
 .conversation .user-input input {

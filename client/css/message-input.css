@@ -2,12 +2,6 @@
 	width: max(100%);
 }
 
-@media screen and (max-width: 990px) {
-	#message-input {
-		max-height: 100%;
-	}
-}
-
 #message-input::-webkit-scrollbar {
 	width: 5px;
 }
