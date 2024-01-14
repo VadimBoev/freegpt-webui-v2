@@ -1,6 +1,6 @@
 .message {
 	width: max(100%);
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 	display: flex;
 	gap: var(--section-gap);
 	padding: var(--section-gap);
