@@ -98,7 +98,7 @@
 #send-button {
 	position: absolute;
 	bottom: 25%;
-	right: 10px;
+	right: 0;
 	z-index: 1;
 	padding: 16px;
 }
