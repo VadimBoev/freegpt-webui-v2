@@ -72,3 +72,15 @@ msgstr "Webadgang"
 #:
 msgid "Version"
 msgstr "Version"
+
+#:
+msgid "Model"
+msgstr "Model"
+
+#:
+msgid "Provider"
+msgstr "Udbyder"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"
