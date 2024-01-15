@@ -1,7 +1,3 @@
-#message-input {
-	width: max(90%);
-}
-
 #message-input::-webkit-scrollbar {
 	width: 5px;
 }

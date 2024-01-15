@@ -26,7 +26,7 @@
 	
 .conversation .user-input {
 	max-height: 180px;
-	margin-top: 4px;	
+	margin-top: 4px;
 }
 
 @media screen and (max-width: 990px) {
@@ -81,6 +81,10 @@
 	align-items: center;
 	padding: 10px 10px;
 	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
 	}
 
 @media screen and (max-width: 990px) {
@@ -88,19 +92,12 @@
 		border-top-left-radius: unset;
 		border-top-right-radius: unset;
 		border-top: var(--blur-border);
-		display: flex;
-		flex-wrap: wrap;
-		align-content: flex-end;
-		align-items: flex-end;
 		}		
 }
 
 #send-button {
-	position: absolute;
-	bottom: 25%;
 	right: 0;
-	z-index: 1;
-	padding: 16px;
+	padding: 4px;
 }
 
 #cursor {
