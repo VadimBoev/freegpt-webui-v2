@@ -22,7 +22,7 @@
 .hljs-copy-button {
 	position: absolute;
 	transform: translateX(calc(100% + 1.125em));
-	top: 0;
+	top: 0.2em;
 	right: 1em;
 	width: 2em;
 	height: 2em;
@@ -43,7 +43,6 @@
 
 .hljs-copy-button:hover {
 	border-color: #ffffff44;
-	z-index: 1001;
 	cursor: pointer;
 }
 
@@ -58,13 +57,13 @@
 }
 
 .hljs-copy-alert {
-	clip: rect(0 0 0 0);
-	clip-path: inset(50%);
-	height: 1px;
+	//clip: rect(0 0 0 0);
+	//clip-path: inset(50%);
+	height: 300px;
 	overflow: hidden;
 	position: absolute;
 	white-space: nowrap;
-	width: 1px;
+	width: 100px;
 }
 
 @media (prefers-reduced-motion) {
