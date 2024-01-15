@@ -14,10 +14,6 @@
 	overflow: hidden;
 }
 
-.hljs-copy-wrapper:hover {
-	overflow: visible;
-}
-
 .hljs-copy-wrapper:hover .hljs-copy-button,
 .hljs-copy-button:focus {
 	transform: translateX(0);
@@ -26,7 +22,7 @@
 .hljs-copy-button {
 	position: absolute;
 	transform: translateX(calc(100% + 1.125em));
-	top: 1em;
+	top: 0.5em;
 	right: 1em;
 	width: 2rem;
 	height: 2rem;
@@ -48,7 +44,6 @@
 .hljs-copy-button:hover {
 	border-color: #ffffff44;
 	z-index: 1001;
-	display: box;
 }
 
 .hljs-copy-button:active {
