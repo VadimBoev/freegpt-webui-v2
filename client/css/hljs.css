@@ -11,7 +11,7 @@
 /* style for hljs copy */
 .hljs-copy-wrapper {
 	position: relative;
-	overflow: hidden;
+	overflow-x: clip;
 }
 
 .hljs-copy-wrapper:hover .hljs-copy-button,
@@ -22,10 +22,10 @@
 .hljs-copy-button {
 	position: absolute;
 	transform: translateX(calc(100% + 1.125em));
-	top: 0.5em;
+	top: 0;
 	right: 1em;
-	width: 2rem;
-	height: 2rem;
+	width: 2em;
+	height: 2em;
 	text-indent: -9999px;
 	color: #fff;
 	border-radius: 0.25rem;
@@ -44,6 +44,7 @@
 .hljs-copy-button:hover {
 	border-color: #ffffff44;
 	z-index: 1001;
+	cursor: pointer;
 }
 
 .hljs-copy-button:active {
