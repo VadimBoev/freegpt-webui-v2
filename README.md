@@ -1,4 +1,7 @@
 # FreeGPT WebUI v2
+
+with some UI improvements
+
 <img src="https://github.com/Mylinde/freegpt-webui-v2/blob/main/webui-gpt.png" width="1000" />
 
 ## GPT 3.5/4
