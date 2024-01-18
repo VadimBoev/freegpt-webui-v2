@@ -49,6 +49,7 @@ Run the following command to clone the repository:
 ```
 git clone https://github.com/VadimBoev/freegpt-webui-v2.git
 ```
+Run the following command to clone my fork repository: 
 
 ```
 git clone https://github.com/Mylinde/freegpt-webui-v2.git
