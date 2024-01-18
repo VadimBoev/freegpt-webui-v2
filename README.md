@@ -69,7 +69,7 @@ pip install -r requirements.txt
 ## Running the Application :rocket:
 To run the application, run the following command:
 ```
-python run.py
+python3 run.py
 ```
 
 Access the application in your browser using the URL:
