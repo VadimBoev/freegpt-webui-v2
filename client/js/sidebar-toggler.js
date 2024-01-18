@@ -30,5 +30,8 @@ document.body.addEventListener('click', function(event) {
         if (menuButtonStyle.display !== 'none') {
             hideSidebar(menuButton);
         }
-    }
+}
+   if (!event.target.closest('.sidebar') && !event.target.closest('.menu-button')) {
+        hideSidebar(event.target);
+}
 });

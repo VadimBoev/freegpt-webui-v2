@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta name="full-screen" content="yes" />
 		<meta name="description" content="A conversational AI system that listens, learns, and challenges" />
 		<meta property="og:title" content="ChatGPT" />
 		<meta property="og:image" content="https://openai.com/content/images/2022/11/ChatGPT.jpg" />
@@ -49,71 +50,27 @@
 								<div class="field">
 									<span>{{_('Model')}}</span>
 									<select class="dropdown" name="model" id="model">
-									<option value="gpt-3.5-turbo" selected="">gpt-3.5-turbo</option>
-									<option value="gpt-3.5-turbo-0613">gpt-3.5-turbo-0613</option>
-									<option value="gpt-3.5-turbo-16k">gpt-3.5-turbo-16k</option>
-									<option value="gpt-3.5-turbo-16k-0613">gpt-3.5-turbo-16k-0613</option>
-									<option value="gpt-4">gpt-4</option>
-									<option value="gpt-4-0613">gpt-4-0613</option>
-									<option value="gpt-4-32k">gpt-4-32k</option>
-									<option value="gpt-4-32k-0613">gpt-4-32k-0613</option>
-									<option value="palm2">palm2</option>
-									<option value="palm">palm</option>
-									<option value="google">google</option>
-									<option value="google-bard">google-bard</option>
-									<option value="google-palm">google-palm</option>
-									<option value="bard">bard</option>
-									<option value="llama2-7b">llama2-7b</option>
-									<option value="llama2-13b">llama2-13b</option>
-									<option value="llama2-70b">llama2-70b</option>
-									<option value="command-nightly">command-nightly</option>
-									<option value="gpt-neox-20b">gpt-neox-20b</option>
-									<option value="santacoder">santacoder</option>
-									<option value="bloom">bloom</option>
-									<option value="flan-t5-xxl">flan-t5-xxl</option>
-									<option value="code-davinci-002">code-davinci-002</option>
-									<option value="text-ada-001">text-ada-001</option>
-									<option value="text-babbage-001">text-babbage-001</option>
-									<option value="text-curie-001">text-curie-001</option>
-									<option value="text-davinci-002">text-davinci-002</option>
-									<option value="text-davinci-003">text-davinci-003</option>
-									<option value="llama70b-v2-chat">llama70b-v2-chat</option>
-									<option value="llama13b-v2-chat">llama13b-v2-chat</option>
-									<option value="llama7b-v2-chat">llama7b-v2-chat</option>
-									<option value="oasst-sft-1-pythia-12b">oasst-sft-1-pythia-12b</option>
-									<option value="oasst-sft-4-pythia-12b-epoch-3.5">oasst-sft-4-pythia-12b-epoch-3.5</option>
-									<option value="command-light-nightly">command-light-nightly</option>
+										<option value="">Default</option>
+										<option value="GPT-4">gpt-4</option>
+										<option value="GPT-3.5-turbo">gpt-3.5-turbo</option>
+										<option value="LLaMA2-70b">llama2-70b</option>
+										<option value="Gemini-pro">gemini-pro</option>
+										
 									</select>
 								</div>
 								<div class="field">
 									<span>{{_('Provider')}}</span>
 										<select class="dropdown" name="provider" id="provider">
-										<option value="g4f.Provider.Auto" selected>Auto</option>
-										<option value="g4f.Provider.AItianhuSpace">AItianhuSpace</option>
-										<option value="g4f.Provider.ChatgptLogin">ChatgptLogin</option>
-										<option value="g4f.Provider.ChatgptDemo">ChatgptDemo</option>
-										<option value="g4f.Provider.ChatgptDuo">ChatgptDuo</option>
-										<option value="g4f.Provider.Vitalentum">Vitalentum</option>
-										<option value="g4f.Provider.ChatgptAi">ChatgptAi</option>
-										<option value="g4f.Provider.AItianhu">AItianhu</option>
-										<option value="g4f.Provider.ChatBase">ChatBase</option>
-										<option value="g4f.Provider.Liaobots">Liaobots</option>
-										<option value="g4f.Provider.Yqcloud">Yqcloud</option>
-										<option value="g4f.Provider.Myshell">Myshell</option>
-										<option value="g4f.Provider.FreeGpt">FreeGpt</option>
-										<option value="g4f.Provider.Vercel">Vercel</option>
-										<option value="g4f.Provider.Aichat">Aichat</option>
-										<option value="g4f.Provider.GPTalk">GPTalk</option>
-										<option value="g4f.Provider.GptGod">GptGod</option>
-										<option value="g4f.Provider.AiAsk">AiAsk</option>
-										<option value="g4f.Provider.GptGo">GptGo</option>
-										<option value="g4f.Provider.Ylokh">Ylokh</option>
-										<option value="g4f.Provider.Bard">Bard</option>
-										<option value="g4f.Provider.Aibn">Aibn</option>
-										<option value="g4f.Provider.Bing">Bing</option>
-										<option value="g4f.Provider.You">You</option>
-										<option value="g4f.Provider.Llama2">Llama2</option>
-										<option value="g4f.Provider.Aivvm">Aivvm</option>
+											<option value="Auto">Auto</option>
+											<option value="Bard">Bard</option>
+											<option value="Bing">Bing</option>											
+											<option value="HuggingChat">HuggingChat</option>											
+											<option value="g4f.Provider.Llama2">Llama2</option>
+											<option value="Liaobots">Liaobots</option>
+											<option value="Phind">Phind</option>
+											<option value="OpenaiChat">OpenaiChat</option>
+
+											
 									</select>
 								</div>
 								<div class="field">
@@ -136,12 +93,17 @@
 									<input type="checkbox" id="switch" />
 									<label for="switch"></label>
 								</div>
-								<div class="checkbox field">
+								<div class="field checkbox">
 									<span>{{_('Dark Mode')}}</span>
 									<input type="checkbox" id="theme-toggler" />
 									<label for="theme-toggler"></label>
 								</div>
-								<!-- <div class="checkbox field">
+								<div class="field checkbox fullscreen">
+									<span>{{_('Fullscreen Mode')}}</span>
+									<input type="checkbox" id="fullscreen-toggle" />
+									<label for="fullscreen-toggle"></label>
+								</div>
+								<!-- <div class="field checkbox">
 									<span>{{_('Highlight')}}</span>
 									<input type="checkbox" id="hl-toggle" />
 									<label for="hl-toggle"></label>
@@ -179,11 +141,9 @@
 		<div class="menu-button">
 			<i class="fa-solid fa-bars"></i>
 		</div>
-
+				   
 		<!-- scripts -->
-		<script>
-			window.conversation_id = "{{ chat_id }}";
-		</script>
+		<script>window.conversation_id = "{{ chat_id }}";</script>
 		<script src="{{ url_for('bp.static', filename='js/icons.js') }}"></script>
 		<script src="{{ url_for('bp.static', filename='js/chat.js') }}" defer></script>
 		<script src="{{ url_for('bp.static', filename='js/markdown-it.min.js') }}"></script>
@@ -192,5 +152,6 @@
 		<script src="{{ url_for('bp.static', filename='js/theme-toggler.js') }}"></script>
 		<script src="{{ url_for('bp.static', filename='js/sidebar-toggler.js') }}"></script>
 		<script src="{{ url_for('bp.static', filename='js/change-language.js') }}"></script>
+		<script src="{{ url_for('bp.static', filename='js/fullscreen-toggle.js') }}"></script>
 	</body>
 </html>

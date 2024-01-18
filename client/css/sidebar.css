@@ -172,10 +172,7 @@
 }
 
 .menu-button.rotated {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	
+	position: absolute;	
 }
 
 @media screen and (max-width: 990px) {
@@ -184,7 +181,6 @@
 		width: 100%;
 		max-width: none;
 	}
-
 	.menu-button {
 		display: flex !important;
 	}
@@ -204,7 +200,6 @@
 		height: auto;
 		background-color: transparent;
 	}
-
 	.sidebar.shown .box {
 		background-color: #16171a;
 		width: auto;
