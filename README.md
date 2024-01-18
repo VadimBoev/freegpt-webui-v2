@@ -49,6 +49,12 @@ Run the following command to clone the repository:
 ```
 git clone https://github.com/VadimBoev/freegpt-webui-v2.git
 ```
+### Cloning the Repository :inbox_tray:
+Run the following command to clone my fork repository:  
+
+```
+git clone https://github.com/Mylinde/freegpt-webui-v2.git
+```
 
 ### Install Dependencies :wrench: 
 Navigate to the project directory:
