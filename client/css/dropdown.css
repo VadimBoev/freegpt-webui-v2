@@ -1,10 +1,6 @@
 .dropdown {
-	border: 1px solid var(--conversations);
-}
-
-.theme-light .dropdown {
-	border: 1px solid #66666612;
-	box-shadow: 2px 2px 2px #dbdbdb;
+	border: var(--blur-border);
+	box-shadow: var(--blur-box-shadow);
 }
 
 @media screen and (max-width: 990px) {

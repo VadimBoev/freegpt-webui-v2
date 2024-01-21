@@ -507,23 +507,24 @@ function createElement(tag, { classNames, id, innerHTML, textContent } = {}) {
 		el.appendChild(preElement);
 	}
 	return el;
-}
+};
 
-(async () => {
-    response = await fetch('/backend-api/v2/providers')
-    providers = await response.json()
+//(async () => {
+    //response = await fetch('/backend-api/v2/providers')
+//    providers = await response.json()
     
-    //let select = document.getElementById('provider');
-    //select.textContent = '';
+//    let select = document.getElementById('provider');
+//    select.textContent = '';
 	//
-    //let auto = document.createElement('option');
-    //auto.value = '';
-    //auto.text = 'Provider: Auto';
-    //select.appendChild(auto);
+//    let auto = document.createElement('option');
+//    auto.value = '';
+//    auto.text = 'Provider: Auto';
+//    select.appendChild(auto);
 	//
-    //for (provider of providers) {
-    //    let option = document.createElement('option');
-    //    option.value = option.text = provider;
-    //    select.appendChild(option);
-    //}
-})();
+//    for (provider of providers) {
+//        let option = document.createElement('option');
+//        option.value = option.text = provider;
+//        select.appendChild(option);
+//    }
+//})
+//();

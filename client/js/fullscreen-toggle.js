@@ -1,11 +1,18 @@
-function toggleFullScreen() {
-  // Prüfen, ob der Vollbildmodus bereits aktiv ist
-  if (!document.fullscreenElement) {
-    // Wählen Sie das Element aus, das in den Vollbildmodus versetzt werden soll
-    const elementToFullScreen = document.documentElement; // für gesamte Seite
+let shiftAmount = 70;
+let mainContainer = document.querySelector('.main-container'); 
 
-    // Versuchen Sie, den Vollbildmodus anzufragen
-    if (elementToFullScreen.mozRequestFullScreen) { // Firefox
+function shiftContentUp() {
+   mainContainer.style.marginTop = "-" + shiftAmount + "%";
+}
+
+function resetContent() {
+  mainContainer.style.marginTop = "0";
+}
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    const elementToFullScreen = document.documentElement;
+        if (elementToFullScreen.mozRequestFullScreen) { // Firefox
       elementToFullScreen.mozRequestFullScreen();
     } else if (elementToFullScreen.webkitRequestFullscreen) { // Chrome, Safari und Opera
       elementToFullScreen.webkitRequestFullscreen();
@@ -13,7 +20,6 @@ function toggleFullScreen() {
       elementToFullScreen.msRequestFullscreen();
     }
   } else {
-    // Verlassen des Vollbildmodus
     if (document.mozCancelFullScreen) { // Firefox
       document.mozCancelFullScreen();
     } else if (document.webkitExitFullscreen) { // Chrome, Safari und Opera
@@ -24,18 +30,27 @@ function toggleFullScreen() {
   }
 };
 
-// Fügen Sie den Event Listener zum Schalter hinzu
-document.getElementById('fullscreen-toggle').addEventListener('change', function() {
-  toggleFullScreen();
+document.getElementById('message-input').addEventListener('focus', function() {
+  if (document.fullscreenElement) {
+    shiftContentUp();
+  }
+});
+
+document.getElementById('message-input').addEventListener('blur', function() {
+  if (document.fullscreenElement) {
+    resetContent();
+  }
 });
 
 document.addEventListener('fullscreenchange', function() {
-  // Prüfen, ob der Vollbildmodus aktiv ist
   if (document.fullscreenElement) {
-    // Setzen Sie die Checkbox auf checked
     document.getElementById('fullscreen-toggle').checked = true;
   } else {
-    // Setzen Sie die Checkbox auf unchecked
     document.getElementById('fullscreen-toggle').checked = false;
   }
 });
+
+document.getElementById('fullscreen-toggle').addEventListener('change', function() {
+  toggleFullScreen(this.checked);
+});
+

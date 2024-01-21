@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "FreeGPT",
+    "short_name": "FreeGPT",
     "icons": [
         {
             "src": "/assets/img/android-chrome-192x192.png",
@@ -16,4 +16,8 @@
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "display": "standalone"
+    "display_override": ["fullscreen", "minimal-ui"],
+     "start_url": "/index.html",
 }
+
+

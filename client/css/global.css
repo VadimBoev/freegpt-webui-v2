@@ -19,8 +19,8 @@
 	--colour-6: #dadada;
 	--accent: #b97272;
 	--blur-bg: #ffffff;
-	--blur-border: 1px solid #66666612;
-	--blur-box-shadow: 2px 2px 2px #dbdbdb;
+	--blur-border: 1px solid #dbdbdb57;
+	--blur-box-shadow: 2px 2px 2px #dbdbdb57;
 	--user-input: #282828;
 	--conversations: #666666;
 }
@@ -33,9 +33,10 @@
 	--colour-5: #181818;
 	--colour-6: #242424;
 
-	--accent: #b97272;
+	--accent: #151718;
 	--blur-bg: #242627;
-	--blur-border: #242627;
+	--blur-border: 1px solid #47474757;
+	--blur-box-shadow: 2px 2px 2px #47474757;
 	--user-input: #f5f5f5;
 	--conversations: #555555;
 }
@@ -76,8 +77,3 @@ pre {
 	}
 }
 
-@media only screen and (max-width: 990px) {
-  body {
-    display: fullscreen;
-  }
-}

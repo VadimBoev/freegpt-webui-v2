@@ -29,7 +29,7 @@
 			href="{{ url_for('bp.static', filename='img/favicon-16x16.png') }}" />
 		<link rel="manifest" href="{{ url_for('bp.static', filename='img/site.webmanifest') }}" />
 		<title>FreeGPT</title>
-	</head>
+		</head>
 
 	<body data-urlprefix="{{ url_prefix}}">
 		<div class="main-container">
@@ -53,19 +53,19 @@
 										<option value="gpt-3.5-turbo" selected="">GPT-3.5-turbo</option>
 										<option value="gpt-4">GPT-4</option>
 										<option value="llama2-70b">LLaMA2-70b</option>
-										<option value="gemini-pro">Gemini-pro</option>																	
+										<option value="gemini-pro">Gemini-pro</option>
 									</select>
 								</div>
 								<div class="field">
 									<span>{{_('Provider')}}</span>
 										<select class="dropdown" name="provider" id="provider">
-											<option value="Auto" selected>Auto</option>
-											<option value="ChatgptLogin">ChatGPT Login</option>
-											<option value="Bing">Bing</option>											
-											<option value="Llama2">Llama2</option>
-											<option value="Liaobots">Liaobots</option>
-											<option value="Phind">Phind</option>
-											<option value="You">You</option>																					
+											<option value="g4f.Provider.Auto" selected>Auto</option>
+											<option value="g4f.Provider.ChatgptLogin">ChatGPT Login</option>
+											<option value="g4f.Provider.Bing">Bing</option>											
+											<option value="g4f.Provider.Llama2">Llama2</option>
+											<option value="g4f.Provider.Liaobots">Liaobots</option>
+											<option value="g4f.Provider.Phind">Phind</option>
+											<option value="g4f.Provider.You">You</option>																					
 									</select>
 								</div>
 								<div class="field">
@@ -138,6 +138,7 @@
 		</div>
 				   
 		<!-- scripts -->
+		
 		<script>window.conversation_id = "{{ chat_id }}";</script>
 		<script src="{{ url_for('bp.static', filename='js/icons.js') }}"></script>
 		<script src="{{ url_for('bp.static', filename='js/chat.js') }}" defer></script>

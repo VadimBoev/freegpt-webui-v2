@@ -91,15 +91,8 @@
 	height: max(98%);
 	z-index: 1000;
 	border: none;
+	box-shadow: var(--blur-box-shadow);
 }
-
-.theme-light .sidebar.shown {
-	box-shadow: 2px 2px 2px #dbdbdb;
-}
-
-.theme-dark .sidebar.shown {
-	box-shadow: 2px 2px 2px #242627;
-	}	
 
 .sidebar.shown .box {
 	background-color: #16171a;
