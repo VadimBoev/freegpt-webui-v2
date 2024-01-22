@@ -19,8 +19,7 @@ We will solve a question or a problem together! 🌍
 You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
 
 ## Known bugs 🚧
-- Web Access is not working.  
-Because the API that was used earlier in the "freegpt-webui" repository from ramonvc stopped working. This will be fixed later
+- Copying highlighted Text not working.
 
 ## Features v2 📢
 - Updated g4f
