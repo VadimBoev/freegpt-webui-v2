@@ -1,10 +1,12 @@
 # FreeGPT WebUI v2
 
-with some UI improvements
-
+With some UI improvements 😄
+  
+Desktop
 <img src="https://github.com/Mylinde/freegpt-webui-v2/blob/main/webui-gpt.png" width="1000" />
-
-<img src="https://github.com/Mylinde/freegpt-webui-v2/blob/main/mobile-ui.png" height="150" />
+  
+Mobile Device  
+<img src="https://github.com/Mylinde/freegpt-webui-v2/blob/main/mobile-ui.png" width="30%" />
 
 ## GPT 3.5/4
 
