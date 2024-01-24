@@ -73,3 +73,15 @@ msgstr "Веб-доступ"
 #:
 msgid "Version"
 msgstr "Версія"
+
+#:
+msgid "Model"
+msgstr "Модель"
+
+#:
+msgid "Provider"
+msgstr "Провайдер"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

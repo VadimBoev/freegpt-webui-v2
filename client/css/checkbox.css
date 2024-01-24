@@ -52,4 +52,5 @@
 	.checkbox input:checked + label:after {
 		left: calc(100% - 2px - 10px);
 	}
+	
 }

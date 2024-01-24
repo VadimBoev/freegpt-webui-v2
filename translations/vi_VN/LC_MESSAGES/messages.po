@@ -72,3 +72,15 @@ msgstr "Truy cập web"
 #:
 msgid "Version"
 msgstr "Phiên bản"
+
+#:
+msgid "Model"
+msgstr "Người mẫu"
+
+#:
+msgid "Provider"
+msgstr "Các nhà cung cấp"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

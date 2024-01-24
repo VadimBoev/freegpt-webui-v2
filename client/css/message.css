@@ -1,6 +1,6 @@
 .message {
-	width: 100%;
-	overflow-wrap: break-word;
+	width: max(100%);
+	overflow-wrap: anywhere;
 	display: flex;
 	gap: var(--section-gap);
 	padding: var(--section-gap);
@@ -28,7 +28,6 @@
 .message .content {
 	display: flex;
 	flex-direction: column;
-	width: 90%;
 	gap: 18px;
 }
 
@@ -39,7 +38,7 @@
 	line-height: 1.3;
 }
 
-@media screen and (max-height: 720px) {
+@media screen and (max-height: 100%) {
 	.message {
 		padding: 12px;
 		gap: 0;
@@ -47,7 +46,7 @@
 
 	.message .content {
 		margin-left: 8px;
-		width: 80%;
+		width: max(80%);
 	}
 
 	.message .avatar-container img {

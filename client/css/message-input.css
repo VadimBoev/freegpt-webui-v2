@@ -1,8 +1,3 @@
-#message-input {
-	margin-right: 30px;
-	height: 64px;
-}
-
 #message-input::-webkit-scrollbar {
 	width: 5px;
 }

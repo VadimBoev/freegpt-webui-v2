@@ -72,3 +72,15 @@ msgstr "Web Erişimi"
 #:
 msgid "Version"
 msgstr "Versiyon"
+
+#:
+msgid "Model"
+msgstr "Modeli"
+
+#:
+msgid "Provider"
+msgstr "Sağlayıcı"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

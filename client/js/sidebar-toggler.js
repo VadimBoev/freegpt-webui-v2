@@ -24,11 +24,14 @@ function hideSidebar(target) {
 
 menuButton.addEventListener("click", toggleSidebar);
 
-document.body.addEventListener('click', function(event) {
-    if (event.target.matches('.conversation-title')) {
+document.body.addEventListener('click', function(event) { 
+   if (!event.target.closest('.sidebar') && !event.target.closest('.menu-button') && !event.target.closest('.conversation-sidebar')){
+        hideSidebar(event.target);
+}
+   if (event.target.matches('.conversation-title')) {
         const menuButtonStyle = window.getComputedStyle(menuButton);
         if (menuButtonStyle.display !== 'none') {
             hideSidebar(menuButton);
         }
-    }
+}
 });

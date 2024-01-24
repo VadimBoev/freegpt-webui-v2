@@ -72,3 +72,15 @@ msgstr "Akses Web"
 #:
 msgid "Version"
 msgstr "Versi"
+
+#:
+msgid "Model"
+msgstr "Model"
+
+#:
+msgid "Provider"
+msgstr "Pemberi"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

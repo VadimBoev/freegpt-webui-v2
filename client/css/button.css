@@ -3,8 +3,9 @@
 	padding: 8px 12px;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid var(--conversations);
+	border: var(--blur-border);
 	border-radius: var(--border-radius-1);
+	box-shadow: var(--blur-box-shadow);
 	width: 100%;
 	background: transparent;
 	cursor: pointer;
@@ -13,6 +14,7 @@
 .button span {
 	color: var(--colour-3);
 	font-size: 0.875rem;
+	padding: 8px;
 }
 
 .button i::before {

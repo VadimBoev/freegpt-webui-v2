@@ -73,3 +73,15 @@ msgstr "الوصول إلى الويب"
 #:
 msgid "Version"
 msgstr "الإصدار"
+
+#:
+msgid "Model"
+msgstr "نموذج"
+
+#:
+msgid "Provider"
+msgstr "مزود"
+
+#:
+msgid "Jailbreak"
+msgstr "الهروب من السجن"

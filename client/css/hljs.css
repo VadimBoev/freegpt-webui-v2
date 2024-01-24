@@ -1,17 +1,17 @@
 .hljs {
-	color: #e9e9f4;
-	background: #28293629;
-	border-radius: var(--border-radius-1);
-	border: 1px solid var(--blur-border);
-	font-size: 15px;
+	color: #4b45be;
 	word-wrap: break-word;
 	white-space: pre-wrap;
+}
+
+.theme-dark .hljs {
+	color: #949494;
 }
 
 /* style for hljs copy */
 .hljs-copy-wrapper {
 	position: relative;
-	overflow: hidden;
+	overflow-x: clip;
 }
 
 .hljs-copy-wrapper:hover .hljs-copy-button,
@@ -22,10 +22,10 @@
 .hljs-copy-button {
 	position: absolute;
 	transform: translateX(calc(100% + 1.125em));
-	top: 1em;
+	top: 0.2em;
 	right: 1em;
-	width: 2rem;
-	height: 2rem;
+	width: 2em;
+	height: 2em;
 	text-indent: -9999px;
 	color: #fff;
 	border-radius: 0.25rem;
@@ -37,8 +37,13 @@
 	transition: background-color 200ms ease, transform 200ms ease-out;
 }
 
+.theme-dark .hljs-copy-button {
+	background-color: #949494;
+} 
+
 .hljs-copy-button:hover {
 	border-color: #ffffff44;
+	cursor: pointer;
 }
 
 .hljs-copy-button:active {

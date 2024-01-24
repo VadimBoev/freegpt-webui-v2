@@ -72,3 +72,15 @@ msgstr "Webhozzáférés"
 #:
 msgid "Version"
 msgstr "Verzió"
+
+#:
+msgid "Model"
+msgstr "Modell"
+
+#:
+msgid "Provider"
+msgstr "Szolgáltató"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"

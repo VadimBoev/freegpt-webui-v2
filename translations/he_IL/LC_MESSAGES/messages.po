@@ -72,3 +72,15 @@ msgstr "גישה לאינטרנט"
 #:
 msgid "Version"
 msgstr "גרסה"
+
+#:
+msgid "Model"
+msgstr "דֶגֶם"
+
+#:
+msgid "Provider"
+msgstr "ספק"
+
+#:
+msgid "Jailbreak"
+msgstr "Jailbreak"
