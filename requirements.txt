@@ -33,3 +33,4 @@ asyncstdlib
 async_property
 pybabel
 Brotli
+bs4
