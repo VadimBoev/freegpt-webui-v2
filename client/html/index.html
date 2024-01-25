@@ -89,6 +89,11 @@
 									<label for="switch"></label>
 								</div>
 								<div class="field checkbox">
+									<span>{{_('Image Generator')}}</span>
+									<input type="checkbox" id="patch" />
+									<label for="patch" title="Works only with Bing and some other providers"></label>
+								</div>
+								<div class="field checkbox">
 									<span>{{_('Dark Mode')}}</span>
 									<input type="checkbox" id="theme-toggler" />
 									<label for="theme-toggler"></label>
@@ -129,6 +134,16 @@
 							<i class="fa-regular fa-paper-plane-top"></i>
 						</div>
 					</div>
+					<div class="file-upload box">
+						<i class="fa-solid fa-file"></i>	
+						<label for="file">								
+						<input type="file" id="file" name="file" accept="text/plain, text/html, text/xml, application/json, text/javascript, .sh, .py, .php, .css, .yaml, .sql, .log, .csv, .twig, .md" required/>							
+						</label>
+						<i class="fa-regular fa-image"></i>				
+						<label for="image">
+						<input type="file" id="image" name="image" accept="image/png, image/gif, image/jpeg, image/svg+xml" required/>
+						</label>
+					</div>
 				</div>
 				
 			</div>
@@ -137,8 +152,7 @@
 			<i class="fa-solid fa-bars"></i>
 		</div>
 				   
-		<!-- scripts -->
-		
+		<!-- scripts -->		
 		<script>window.conversation_id = "{{ chat_id }}";</script>
 		<script src="{{ url_for('bp.static', filename='js/icons.js') }}"></script>
 		<script src="{{ url_for('bp.static', filename='js/chat.js') }}" defer></script>

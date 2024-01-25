@@ -85,3 +85,11 @@ msgstr "Dostawca"
 #:
 msgid "Jailbreak"
 msgstr "Jailbreak"
+
+#:
+msgid "Fullscreen Mode"
+msgstr ""
+
+#:
+msgid "Image Generator"
+msgstr ""

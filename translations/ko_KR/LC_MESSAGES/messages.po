@@ -84,3 +84,11 @@ msgstr "공급자"
 #:
 msgid "Jailbreak"
 msgstr "탈옥"
+
+#:
+msgid "Fullscreen Mode"
+msgstr ""
+
+#:
+msgid "Image Generator"
+msgstr ""

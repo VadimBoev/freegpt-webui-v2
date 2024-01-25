@@ -24,7 +24,9 @@
 }
 	
 .conversation .user-input {
-	max-height: 180px;
+	display: flex;
+	flex-direction: column;
+	max-height: 200px;
 	margin-top: 4px;
 }
 
@@ -84,7 +86,9 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	align-items: center;
-	}
+	border-bottom-left-radius: unset;
+	border-bottom-right-radius: unset;		
+}
 
 @media screen and (max-width: 990px) {
 	.box.input-box {
@@ -97,6 +101,53 @@
 #send-button {
 	right: 0;
 	padding: 4px;
+}
+
+.file-upload {
+    top: -2px;
+    border-top-left-radius: unset;
+    border-top-right-radius: unset;
+    display: flex;
+    height: max-content;
+    width: 100%;
+    overflow: hidden;
+    padding: 4px;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    	display: none;
+}
+
+.file-upload input[type="file"] {
+	font-size: 0.9rem !important;
+	cursor: pointer;
+}
+
+label[for="image"], label[for="file"] {
+	background: none;
+    	border-radius: unset;
+    	cursor: pointer;
+    	position: relative;    
+	width: 200px;
+    	height: max-content;    
+    	display: flex;
+    	justify-content: flex-end;
+}
+
+label[for="file"], i.fa-solid.fa-file, label[for="image"], i.fa-regular.fa-image {	
+	margin: 6px;	
+}
+
+label[for="image"]:has(> input:valid) {
+	input[type="file" i]{
+    		color: var(--accent) !important;
+   	}
+}
+
+label[for="file"]:has(> input:valid) {
+	input[type="file" i]{
+    		color: var(--accent) !important;
+   	}
 }
 
 #cursor {

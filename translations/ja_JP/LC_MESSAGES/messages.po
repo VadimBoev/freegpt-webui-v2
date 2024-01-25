@@ -84,3 +84,11 @@ msgstr "プロバイダー"
 #:
 msgid "Jailbreak"
 msgstr "脱獄"
+
+#:
+msgid "Fullscreen Mode"
+msgstr ""
+
+#:
+msgid "Image Generator"
+msgstr ""

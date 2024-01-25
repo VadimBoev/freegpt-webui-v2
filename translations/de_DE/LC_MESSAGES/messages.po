@@ -84,3 +84,11 @@ msgstr "Anbieter"
 #:
 msgid "Jailbreak"
 msgstr "Jailbreak"
+
+#:
+msgid "Fullscreen Mode"
+msgstr "Vollbild Modus"
+
+#:
+msgid "Image Generator"
+msgstr "Bildgenerator"
