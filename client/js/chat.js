@@ -130,9 +130,7 @@ const ask_gpt = async (message) => {
 
 			chunk = decodeUnicode(new TextDecoder().decode(value));
 
-			if (
-				chunk.includes(`<form id="challenge-form" action="${url_prefix}/backend-api/v2/conversation?`)
-			) {
+			if (chunk.includes(`<form id="challenge-form" action="${url_prefix}/backend-api/v2/conversation?`)) {
 				chunk = `cloudflare token expired, please refresh the page.`;
 			}
 
@@ -192,7 +190,10 @@ const ask_gpt = async (message) => {
 
 const add_user_message_box = (message) => {
 	const messageDiv = createElement("div", { classNames: ["message"] });
-	const avatarContainer = createElement("div", { classNames: ["avatar-container"], innerHTML: user_image });
+	const avatarContainer = createElement("div", {
+		classNames: ["avatar-container"],
+		innerHTML: user_image,
+	});
 	const contentDiv = createElement("div", {
 		classNames: ["content"],
 		id: `user_${token}`,
@@ -283,7 +284,10 @@ const load_conversation = async (conversation_id) => {
 
 const load_user_message_box = (content) => {
 	const messageDiv = createElement("div", { classNames: ["message"] });
-	const avatarContainer = createElement("div", { classNames: ["avatar-container"], innerHTML: user_image });
+	const avatarContainer = createElement("div", {
+		classNames: ["avatar-container"],
+		innerHTML: user_image,
+	});
 	const contentDiv = createElement("div", { classNames: ["content"] });
 	const preElement = document.createElement("pre");
 	preElement.textContent = content;
@@ -324,13 +328,14 @@ const add_conversation = async (conversation_id, title) => {
 				id: conversation_id,
 				title: title,
 				items: [],
+				created_at: Date.now(),
 			})
 		);
 	}
 };
 
 const add_message = async (conversation_id, role, content) => {
-	before_adding = JSON.parse(localStorage.getItem(`conversation:${conversation_id}`));
+	let before_adding = JSON.parse(localStorage.getItem(`conversation:${conversation_id}`));
 
 	before_adding.items.push({
 		role: role,
@@ -351,6 +356,8 @@ const load_conversations = async (limit, offset, loader) => {
 			conversations.push(JSON.parse(conversation));
 		}
 	}
+
+	conversations.sort((a, b) => b.created_at - a.created_at);
 
 	//if (loader === undefined) spinner.parentNode.removeChild(spinner)
 	await clear_conversations();
@@ -507,20 +514,20 @@ function createElement(tag, { classNames, id, innerHTML, textContent } = {}) {
 		el.appendChild(preElement);
 	}
 	return el;
-};
+}
 
 //(async () => {
-    //response = await fetch('/backend-api/v2/providers')
+//response = await fetch('/backend-api/v2/providers')
 //    providers = await response.json()
-    
+
 //    let select = document.getElementById('provider');
 //    select.textContent = '';
-	//
+//
 //    let auto = document.createElement('option');
 //    auto.value = '';
 //    auto.text = 'Provider: Auto';
 //    select.appendChild(auto);
-	//
+//
 //    for (provider of providers) {
 //        let option = document.createElement('option');
 //        option.value = option.text = provider;
