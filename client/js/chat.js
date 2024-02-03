@@ -263,12 +263,15 @@ const load_conversation = async (conversation_id) => {
 	let conversation = await JSON.parse(localStorage.getItem(`conversation:${conversation_id}`));
 	console.log(conversation, conversation_id);
 
-	jailbreak = document.getElementById("jailbreak");
 	model = document.getElementById("model");
 	provider = document.getElementById("provider");
-	model.value = conversation.model;
-	provider.value = conversation.provider;
-	jailbreak.value = conversation.jailbreak;
+	jailbreak = document.getElementById("jailbreak");
+	let hasModel = Array.from(model.options).some((option) => option.value === conversation.model);
+	let hasProvider = Array.from(provider.options).some((option) => option.value === conversation.provider);
+	let hasJailbreak = Array.from(jailbreak.options).some((option) => option.value === conversation.jailbreak);
+	if (hasModel) model.value = conversation.model;
+	if (hasProvider) provider.value = conversation.provider;
+	if (hasJailbreak) jailbreak.value = conversation.jailbreak;
 
 	for (item of conversation.items) {
 		if (is_assistant(item.role)) {
