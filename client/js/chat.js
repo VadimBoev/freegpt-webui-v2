@@ -263,6 +263,13 @@ const load_conversation = async (conversation_id) => {
 	let conversation = await JSON.parse(localStorage.getItem(`conversation:${conversation_id}`));
 	console.log(conversation, conversation_id);
 
+	jailbreak = document.getElementById("jailbreak");
+	model = document.getElementById("model");
+	provider = document.getElementById("provider");
+	model.value = conversation.model;
+	provider.value = conversation.provider;
+	jailbreak.value = conversation.jailbreak;
+
 	for (item of conversation.items) {
 		if (is_assistant(item.role)) {
 			message_box.innerHTML += load_gpt_message_box(item.content);
@@ -322,6 +329,9 @@ const get_conversation = async (conversation_id) => {
 
 const add_conversation = async (conversation_id, title) => {
 	if (localStorage.getItem(`conversation:${conversation_id}`) == null) {
+		jailbreak = document.getElementById("jailbreak");
+		model = document.getElementById("model");
+		provider = document.getElementById("provider");
 		localStorage.setItem(
 			`conversation:${conversation_id}`,
 			JSON.stringify({
@@ -329,6 +339,9 @@ const add_conversation = async (conversation_id, title) => {
 				title: title,
 				items: [],
 				created_at: Date.now(),
+				model: model.options[model.selectedIndex].value,
+				provider: provider.options[provider.selectedIndex].value,
+				jailbreak: jailbreak.options[jailbreak.selectedIndex].value,
 			})
 		);
 	}
