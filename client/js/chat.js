@@ -3,7 +3,11 @@ const query = (obj) =>
 		.map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(obj[k]))
 		.join("&");
 const url_prefix = document.querySelector("body").getAttribute("data-urlprefix");
-const markdown = window.markdownit();
+//const markdown = window.markdownit();
+const markdown = window.markdownit({html:true})
+                      .use(texmath, { engine: katex,
+                                      delimiters: 'dollars',
+                                      katexOptions: { macros: {"\\RR": "\\mathbb{R}"} } } );
 const message_box = document.getElementById(`messages`);
 const message_input = document.getElementById(`message-input`);
 const box_conversations = document.querySelector(`.top`);
