@@ -18,7 +18,7 @@ Experience the power of ChatGPT with a user-friendly interface, enhanced jailbre
 **Important!** Don't be afraid to ask a question or write about any problem in the "issue".  
 We will solve a question or a problem together! 🌍  
 
-You can [buy me coffee](https://boosty.to/vadimboev/donate) here ☕🤎
+You can [buy me coffee](https://www.donationalerts.com/r/vadimboevdev) here ☕🤎
 
 ## Known bugs 🚧
 - Copying highlighted Text not working.
