@@ -7,9 +7,6 @@ colorama
 curl_cffi
 aiohttp
 flask
-flask_babel
-flask_cors
-flask-babel
 streamlit
 selenium
 fake-useragent
