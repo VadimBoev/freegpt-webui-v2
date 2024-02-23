@@ -81,6 +81,41 @@ or
 http://localhost:1338
 ```
 
+## Docker 🐳
+### Prerequisites
+Before you start, make sure you have installed [Docker](https://www.docker.com/get-started) on your machine.
+
+### Running the Docker
+Dockerfile for creating a Docker image yourself  
+Then we can create an image using the following commands:
+```
+git clone https://github.com/VadimBoev/freegpt-webui-v2.git cd freegpt-webui-v2
+```
+
+Build image:
+```
+docker build -f Dockerfile -t freegpt-webui-v2 .
+```
+
+Run the application using Docker:
+```
+docker run -p 1338:1338 freegpt-webui-v2:latest
+```
+
+Access the application in your browser using the URL:
+```
+http://127.0.0.1:1338
+```
+or
+```
+http://localhost:1338
+```
+
+When you're done using the application, stop the Docker containers using the following command:
+```
+docker stop <container-id>
+```
+
 ## Incorporated Projects :busts_in_silhouette:
 I highly recommend visiting and supporting both projects.
 
