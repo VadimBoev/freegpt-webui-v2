@@ -134,9 +134,7 @@ const ask_gpt = async (message) => {
 
 			chunk = decodeUnicode(new TextDecoder().decode(value));
 
-			if (
-				chunk.includes(`<form id="challenge-form" action="${url_prefix}/backend-api/v2/conversation?`)
-			) {
+			if (chunk.includes(`<form id="challenge-form" action="${url_prefix}/backend-api/v2/conversation?`)) {
 				chunk = `cloudflare token expired, please refresh the page.`;
 			}
 
@@ -196,7 +194,10 @@ const ask_gpt = async (message) => {
 
 const add_user_message_box = (message) => {
 	const messageDiv = createElement("div", { classNames: ["message"] });
-	const avatarContainer = createElement("div", { classNames: ["avatar-container"], innerHTML: user_image });
+	const avatarContainer = createElement("div", {
+		classNames: ["avatar-container"],
+		innerHTML: user_image,
+	});
 	const contentDiv = createElement("div", {
 		classNames: ["content"],
 		id: `user_${token}`,
@@ -266,6 +267,16 @@ const load_conversation = async (conversation_id) => {
 	let conversation = await JSON.parse(localStorage.getItem(`conversation:${conversation_id}`));
 	console.log(conversation, conversation_id);
 
+	model = document.getElementById("model");
+	provider = document.getElementById("provider");
+	jailbreak = document.getElementById("jailbreak");
+	let hasModel = Array.from(model.options).some((option) => option.value === conversation.model);
+	let hasProvider = Array.from(provider.options).some((option) => option.value === conversation.provider);
+	let hasJailbreak = Array.from(jailbreak.options).some((option) => option.value === conversation.jailbreak);
+	if (hasModel) model.value = conversation.model;
+	if (hasProvider) provider.value = conversation.provider;
+	if (hasJailbreak) jailbreak.value = conversation.jailbreak;
+
 	for (item of conversation.items) {
 		if (is_assistant(item.role)) {
 			message_box.innerHTML += load_gpt_message_box(item.content);
@@ -287,7 +298,10 @@ const load_conversation = async (conversation_id) => {
 
 const load_user_message_box = (content) => {
 	const messageDiv = createElement("div", { classNames: ["message"] });
-	const avatarContainer = createElement("div", { classNames: ["avatar-container"], innerHTML: user_image });
+	const avatarContainer = createElement("div", {
+		classNames: ["avatar-container"],
+		innerHTML: user_image,
+	});
 	const contentDiv = createElement("div", { classNames: ["content"] });
 	const preElement = document.createElement("pre");
 	preElement.textContent = content;
@@ -322,19 +336,26 @@ const get_conversation = async (conversation_id) => {
 
 const add_conversation = async (conversation_id, title) => {
 	if (localStorage.getItem(`conversation:${conversation_id}`) == null) {
+		jailbreak = document.getElementById("jailbreak");
+		model = document.getElementById("model");
+		provider = document.getElementById("provider");
 		localStorage.setItem(
 			`conversation:${conversation_id}`,
 			JSON.stringify({
 				id: conversation_id,
 				title: title,
 				items: [],
+				created_at: Date.now(),
+				model: model.options[model.selectedIndex].value,
+				provider: provider.options[provider.selectedIndex].value,
+				jailbreak: jailbreak.options[jailbreak.selectedIndex].value,
 			})
 		);
 	}
 };
 
 const add_message = async (conversation_id, role, content) => {
-	before_adding = JSON.parse(localStorage.getItem(`conversation:${conversation_id}`));
+	let before_adding = JSON.parse(localStorage.getItem(`conversation:${conversation_id}`));
 
 	before_adding.items.push({
 		role: role,
@@ -355,6 +376,8 @@ const load_conversations = async (limit, offset, loader) => {
 			conversations.push(JSON.parse(conversation));
 		}
 	}
+
+	conversations.sort((a, b) => b.created_at - a.created_at);
 
 	//if (loader === undefined) spinner.parentNode.removeChild(spinner)
 	await clear_conversations();
@@ -511,20 +534,20 @@ function createElement(tag, { classNames, id, innerHTML, textContent } = {}) {
 		el.appendChild(preElement);
 	}
 	return el;
-};
+}
 
 //(async () => {
-    //response = await fetch('/backend-api/v2/providers')
+//response = await fetch('/backend-api/v2/providers')
 //    providers = await response.json()
-    
+
 //    let select = document.getElementById('provider');
 //    select.textContent = '';
-	//
+//
 //    let auto = document.createElement('option');
 //    auto.value = '';
 //    auto.text = 'Provider: Auto';
 //    select.appendChild(auto);
-	//
+//
 //    for (provider of providers) {
 //        let option = document.createElement('option');
 //        option.value = option.text = provider;
