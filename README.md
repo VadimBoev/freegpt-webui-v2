@@ -1,12 +1,20 @@
 # FreeGPT WebUI v2
 
+**I have maintained this repository as long as I could.  
+Due to the deterioration of the available methods of using GPT 3.5 / 4.0, I am archiving this repository.  
+The g4f project has become unstable and has fewer providers.  
+But, I am grateful for the existence of this project, it gave me a lot of new experiences.
+In the future, I plan to launch a text neural network on my website [vadimboev.ru/gpt](https://vadimboev.ru/gpt)**
+
+____
+
 With some UI improvements 😄
   
 Desktop
-<img src="https://github.com/Mylinde/freegpt-webui-v2/blob/main/webui-gpt.png" width="1000" />
+<img src="https://github.com/VadimBoev/freegpt-webui-v2/blob/main/webui-gpt.png" width="1000" />
   
 Mobile Device  
-<img src="https://github.com/Mylinde/freegpt-webui-v2/blob/main/mobile-ui.png" width="30%" />
+<img src="https://github.com/VadimBoev/freegpt-webui-v2/blob/main/mobile-ui.png" width="30%" />
 
 ## GPT 3.5/4
 
